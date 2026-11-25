@@ -17,7 +17,7 @@ SC = ["F", "G", "H", "I"]          # Ham_Veri kaynak sütunları
 
 # (anahtar, etiket, bölüm)
 ITEMS = [
-    ("H", "BİLANÇO (TL)", None),
+    ("H", "BİLANÇO (bin TL)", None),
     ("nakit", "Nakit ve nakit benzerleri", "b"),
     ("kvfy", "Kısa vadeli finansal yatırımlar", "b"),
     ("ticalacak", "Ticari alacaklar (kısa vadeli)", "b"),
@@ -32,9 +32,9 @@ ITEMS = [
     ("toplamyuk", "Toplam yükümlülükler", "b"),
     ("ozkaynak", "Toplam özkaynaklar", "b"),
     ("anaozk", "Ana ortaklığa ait özkaynaklar", "b"),
-    ("sermaye", "Ödenmiş sermaye (TL)", "b"),
+    ("sermaye", "Ödenmiş sermaye (bin TL)", "b"),
     ("paysayisi", "Pay sayısı (adet)", "b"),
-    ("H", "GELİR TABLOSU (TL, KAP işaretleriyle; giderler negatif)", None),
+    ("H", "GELİR TABLOSU (bin TL, KAP işaretleriyle; giderler negatif)", None),
     ("hasilat", "Hasılat", "g"),
     ("smm", "Satışların maliyeti (-)", "g"),
     ("brut", "Brüt kâr", "g"),
@@ -78,7 +78,7 @@ hv = wb.active
 hv.title = "Ham_Veri"
 hv["A1"] = "Ham Veri — Migros (MGROS) ve BİM (BIMAS), KAP konsolide finansal raporları"
 hv["A1"].font = title
-hv["A2"] = ("Tutarlar TL (tam TL). TMS 29 enflasyon muhasebesi uygulanmış raporlar; her dönem için o dönemin kendi "
+hv["A2"] = ("Tutarlar bin TL (raporlardaki gibi; pay sayısı hariç). TMS 29 enflasyon muhasebesi uygulanmış raporlar; her dönem için o dönemin kendi "
             "raporundaki cari dönem sütunu kullanılmıştır. Mavi = elle girilen KAP verisi, sarı = henüz girilmedi.")
 hv["A2"].font = ital
 hdr = ["Kalem"] + COLS + [f"Kaynak – {c}" for c in COLS]
@@ -86,6 +86,12 @@ for i, h in enumerate(hdr):
     c = hv.cell(row=4, column=i + 1, value=h)
     c.font, c.fill, c.alignment, c.border = hdrfont, hdrfill, Alignment(horizontal="center", wrap_text=True), box
 ROW = {}
+ROWS_ALL = {}
+_r = 5
+for _k, _l, _s in ITEMS:
+    if _k != "H":
+        ROWS_ALL[_k] = _r
+    _r += 1
 r = 5
 for key, label, sec in ITEMS:
     if key == "H":
@@ -105,7 +111,13 @@ for key, label, sec in ITEMS:
             cell.font = blue
         else:
             d = data.get(col, {}).get(key)
-            if d is not None and d.get("deger") is not None:
+            if d is not None and d.get("formul"):
+                f = d["formul"]
+                for k2 in sorted(ROWS_ALL, key=len, reverse=True):
+                    f = f.replace(k2, f"{VC[j]}{ROWS_ALL[k2]}")
+                cell.value = f
+                src.value = d.get("kaynak", "")
+            elif d is not None and d.get("deger") is not None:
                 cell.value = d["deger"]
                 cell.font = blue
                 src.value = d.get("kaynak", "")
@@ -219,10 +231,10 @@ r, _ = block(lk, r, "Nakit oranı", "(Nakit ve nakit benzerleri + KV finansal ya
     ("Payda: KVYK", lambda j, m: f"={H('kvyk', j)}", TL, "link"),
     ("Sonuç: Nakit oranı", lambda j, m: f"={ref(m,'Pay: Nakit + KV finansal yatırımlar',j)}/{ref(m,'Payda: KVYK',j)}", RAT, "result"),
 ], "Likidite")
-r, _ = block(lk, r, "Net işletme sermayesi (TL)", "Dönen varlıklar − KVYK", [
+r, _ = block(lk, r, "Net işletme sermayesi (bin TL)", "Dönen varlıklar − KVYK", [
     ("Toplam dönen varlıklar", lambda j, m: f"={H('donen', j)}", TL, "link"),
     ("KVYK", lambda j, m: f"={H('kvyk', j)}", TL, "link"),
-    ("Sonuç: Net işletme sermayesi (TL)", lambda j, m: f"={ref(m,'Toplam dönen varlıklar',j)}-{ref(m,'KVYK',j)}", TL, "result"),
+    ("Sonuç: Net işletme sermayesi (bin TL)", lambda j, m: f"={ref(m,'Toplam dönen varlıklar',j)}-{ref(m,'KVYK',j)}", TL, "result"),
 ], "Likidite")
 
 # ---------------- Faaliyet ----------------

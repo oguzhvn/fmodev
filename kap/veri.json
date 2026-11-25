@@ -1,0 +1,394 @@
+{
+ "MGROS 2025Q4": {
+  "nakit": {
+   "deger": 27783954,
+   "kaynak": "MGROS_2025Q4.pdf, PDF s.8 (tablo s.1)"
+  },
+  "kvfy": {
+   "deger": 126509,
+   "kaynak": "MGROS_2025Q4.pdf, PDF s.8 (tablo s.1); 'Finansal yatırımlar' (dönen varlıklar)"
+  },
+  "ticalacak": {
+   "deger": 2508071,
+   "kaynak": "MGROS_2025Q4.pdf, PDF s.8 (tablo s.1); Ticari alacaklar toplamı (ilişkili + ilişkisiz)"
+  },
+  "stok": {
+   "deger": 41241056,
+   "kaynak": "MGROS_2025Q4.pdf, PDF s.8 (tablo s.1)"
+  },
+  "donen": {
+   "deger": 76260429,
+   "kaynak": "MGROS_2025Q4.pdf, PDF s.8 (tablo s.1)"
+  },
+  "mdv": {
+   "deger": 48302284,
+   "kaynak": "MGROS_2025Q4.pdf, PDF s.8 (tablo s.1)"
+  },
+  "duran": {
+   "deger": 133322850,
+   "kaynak": "MGROS_2025Q4.pdf, PDF s.8 (tablo s.1)"
+  },
+  "toplamvar": {
+   "deger": 209583279,
+   "kaynak": "MGROS_2025Q4.pdf, PDF s.8 (tablo s.1)"
+  },
+  "ticborc": {
+   "deger": 79822747,
+   "kaynak": "MGROS_2025Q4.pdf, PDF s.9 (tablo s.2); Ticari borçlar toplamı (ilişkili + ilişkisiz)"
+  },
+  "kvyk": {
+   "deger": 96259374,
+   "kaynak": "MGROS_2025Q4.pdf, PDF s.9 (tablo s.2)"
+  },
+  "uvyk": {
+   "deger": 33411199,
+   "kaynak": "MGROS_2025Q4.pdf, PDF s.9 (tablo s.2)"
+  },
+  "toplamyuk": {
+   "deger": 129670573,
+   "kaynak": "MGROS_2025Q4.pdf, PDF s.9 (tablo s.2)"
+  },
+  "ozkaynak": {
+   "deger": 79912706,
+   "kaynak": "MGROS_2025Q4.pdf, PDF s.10 (tablo s.3)"
+  },
+  "anaozk": {
+   "deger": 79034025,
+   "kaynak": "MGROS_2025Q4.pdf, PDF s.10 (tablo s.3)"
+  },
+  "sermaye": {
+   "deger": 181054,
+   "kaynak": "MGROS_2025Q4.pdf, PDF s.10 (tablo s.3); Ödenmiş sermaye (nominal)"
+  },
+  "hasilat": {
+   "deger": 412756429,
+   "kaynak": "MGROS_2025Q4.pdf, PDF s.11 (tablo s.4)"
+  },
+  "smm": {
+   "deger": -312409547,
+   "kaynak": "MGROS_2025Q4.pdf, PDF s.11 (tablo s.4)"
+  },
+  "brut": {
+   "deger": 100346882,
+   "kaynak": "MGROS_2025Q4.pdf, PDF s.11 (tablo s.4)"
+  },
+  "efk": {
+   "deger": -8252604,
+   "kaynak": "MGROS_2025Q4.pdf, PDF s.11 (tablo s.4); Esas faaliyet kârı/(zararı)"
+  },
+  "fingid": {
+   "deger": -12068915,
+   "kaynak": "MGROS_2025Q4.pdf, PDF s.11 (tablo s.4)"
+  },
+  "vok": {
+   "deger": 9310371,
+   "kaynak": "MGROS_2025Q4.pdf, PDF s.11 (tablo s.4)"
+  },
+  "netkar": {
+   "deger": 6793533,
+   "kaynak": "MGROS_2025Q4.pdf, PDF s.11 (tablo s.4)"
+  },
+  "ananetkar": {
+   "deger": 6467130,
+   "kaynak": "MGROS_2025Q4.pdf, PDF s.11 (tablo s.4)"
+  },
+  "paysayisi": {
+   "deger": 181054000,
+   "kaynak": "MGROS_2025Q4.pdf, Not 23 (PDF s.58-59); 1 TL nominal × 181.054 bin TL çıkarılmış sermaye"
+  }
+ },
+ "MGROS 2026Q2": {
+  "nakit": {
+   "deger": 32550445,
+   "kaynak": "MGROS_2026Q2.pdf, PDF s.5 (tablo s.1)"
+  },
+  "kvfy": {
+   "deger": 27126,
+   "kaynak": "MGROS_2026Q2.pdf, PDF s.5 (tablo s.1); 'Finansal yatırımlar' (dönen varlıklar)"
+  },
+  "ticalacak": {
+   "deger": 2498840,
+   "kaynak": "MGROS_2026Q2.pdf, PDF s.5 (tablo s.1); Ticari alacaklar toplamı (ilişkili + ilişkisiz)"
+  },
+  "stok": {
+   "deger": 48763579,
+   "kaynak": "MGROS_2026Q2.pdf, PDF s.5 (tablo s.1)"
+  },
+  "donen": {
+   "deger": 88377363,
+   "kaynak": "MGROS_2026Q2.pdf, PDF s.5 (tablo s.1)"
+  },
+  "mdv": {
+   "deger": 58247203,
+   "kaynak": "MGROS_2026Q2.pdf, PDF s.5 (tablo s.1)"
+  },
+  "duran": {
+   "deger": 161696317,
+   "kaynak": "MGROS_2026Q2.pdf, PDF s.5 (tablo s.1)"
+  },
+  "toplamvar": {
+   "deger": 250073680,
+   "kaynak": "MGROS_2026Q2.pdf, PDF s.5 (tablo s.1)"
+  },
+  "ticborc": {
+   "deger": 89449319,
+   "kaynak": "MGROS_2026Q2.pdf, PDF s.6 (tablo s.2); Ticari borçlar toplamı (ilişkili + ilişkisiz)"
+  },
+  "kvyk": {
+   "deger": 110563173,
+   "kaynak": "MGROS_2026Q2.pdf, PDF s.6 (tablo s.2)"
+  },
+  "uvyk": {
+   "deger": 45582133,
+   "kaynak": "MGROS_2026Q2.pdf, PDF s.6 (tablo s.2)"
+  },
+  "toplamyuk": {
+   "deger": 156145306,
+   "kaynak": "MGROS_2026Q2.pdf, PDF s.6 (tablo s.2)"
+  },
+  "ozkaynak": {
+   "deger": 93928374,
+   "kaynak": "MGROS_2026Q2.pdf, PDF s.6 (tablo s.2)"
+  },
+  "anaozk": {
+   "deger": 92914971,
+   "kaynak": "MGROS_2026Q2.pdf, PDF s.6 (tablo s.2)"
+  },
+  "sermaye": {
+   "deger": 181054,
+   "kaynak": "MGROS_2026Q2.pdf, PDF s.6 (tablo s.2); Ödenmiş sermaye (nominal)"
+  },
+  "hasilat": {
+   "deger": 241298039,
+   "kaynak": "MGROS_2026Q2.pdf, PDF s.7 (tablo s.3), 1 Ocak–30 Haziran 2026 sütunu"
+  },
+  "smm": {
+   "deger": -185545479,
+   "kaynak": "MGROS_2026Q2.pdf, PDF s.7 (tablo s.3), 1 Ocak–30 Haziran 2026 sütunu"
+  },
+  "brut": {
+   "deger": 55752560,
+   "kaynak": "MGROS_2026Q2.pdf, PDF s.7 (tablo s.3), 1 Ocak–30 Haziran 2026 sütunu"
+  },
+  "efk": {
+   "deger": -10858537,
+   "kaynak": "MGROS_2026Q2.pdf, PDF s.7 (tablo s.3), 1 Ocak–30 Haziran 2026 sütunu; Esas faaliyet kârı/(zararı)"
+  },
+  "fingid": {
+   "deger": -5938018,
+   "kaynak": "MGROS_2026Q2.pdf, PDF s.7 (tablo s.3), 1 Ocak–30 Haziran 2026 sütunu"
+  },
+  "vok": {
+   "deger": 2662158,
+   "kaynak": "MGROS_2026Q2.pdf, PDF s.7 (tablo s.3), 1 Ocak–30 Haziran 2026 sütunu"
+  },
+  "netkar": {
+   "deger": 1078256,
+   "kaynak": "MGROS_2026Q2.pdf, PDF s.7 (tablo s.3), 1 Ocak–30 Haziran 2026 sütunu"
+  },
+  "ananetkar": {
+   "deger": 1010950,
+   "kaynak": "MGROS_2026Q2.pdf, PDF s.7 (tablo s.3), 1 Ocak–30 Haziran 2026 sütunu"
+  },
+  "paysayisi": {
+   "deger": 181054000,
+   "kaynak": "MGROS_2026Q2.pdf, Not 17; 1 TL nominal × 181.054 bin TL çıkarılmış sermaye"
+  }
+ },
+ "BIMAS 2025Q4": {
+  "nakit": {
+   "deger": 3460632,
+   "kaynak": "BIMAS_2025Q4.pdf, PDF s.9 (tablo s.1)"
+  },
+  "kvfy": {
+   "deger": 10691262,
+   "kaynak": "BIMAS_2025Q4.pdf, PDF s.9 (tablo s.1); 'Finansal yatırımlar' (dönen varlıklar)"
+  },
+  "ticalacak": {
+   "deger": 34807293,
+   "kaynak": "BIMAS_2025Q4.pdf, PDF s.9 (tablo s.1); Ticari alacaklar toplamı (ilişkili + ilişkisiz)"
+  },
+  "stok": {
+   "deger": 54447493,
+   "kaynak": "BIMAS_2025Q4.pdf, PDF s.9 (tablo s.1)"
+  },
+  "donen": {
+   "deger": 111487229,
+   "kaynak": "BIMAS_2025Q4.pdf, PDF s.9 (tablo s.1)"
+  },
+  "mdv": {
+   "deger": 131607587,
+   "kaynak": "BIMAS_2025Q4.pdf, PDF s.9 (tablo s.1)"
+  },
+  "duran": {
+   "deger": 226606155,
+   "kaynak": "BIMAS_2025Q4.pdf, PDF s.9 (tablo s.1)"
+  },
+  "toplamvar": {
+   "deger": 338093384,
+   "kaynak": "BIMAS_2025Q4.pdf, PDF s.9 (tablo s.1)"
+  },
+  "ticborc": {
+   "deger": 86532656,
+   "kaynak": "BIMAS_2025Q4.pdf, PDF s.10 (tablo s.2); Ticari borçlar toplamı (ilişkili + ilişkisiz)"
+  },
+  "kvyk": {
+   "deger": 108356980,
+   "kaynak": "BIMAS_2025Q4.pdf, PDF s.10 (tablo s.2)"
+  },
+  "uvyk": {
+   "deger": 62641837,
+   "kaynak": "BIMAS_2025Q4.pdf, PDF s.10 (tablo s.2)"
+  },
+  "ozkaynak": {
+   "deger": 167094567,
+   "kaynak": "BIMAS_2025Q4.pdf, PDF s.10 (tablo s.2)"
+  },
+  "anaozk": {
+   "deger": 165584579,
+   "kaynak": "BIMAS_2025Q4.pdf, PDF s.10 (tablo s.2)"
+  },
+  "sermaye": {
+   "deger": 600000,
+   "kaynak": "BIMAS_2025Q4.pdf, PDF s.10 (tablo s.2); Ödenmiş sermaye (nominal)"
+  },
+  "hasilat": {
+   "deger": 721062506,
+   "kaynak": "BIMAS_2025Q4.pdf, PDF s.11 (tablo s.3)"
+  },
+  "smm": {
+   "deger": -581615796,
+   "kaynak": "BIMAS_2025Q4.pdf, PDF s.11 (tablo s.3)"
+  },
+  "brut": {
+   "deger": 139446710,
+   "kaynak": "BIMAS_2025Q4.pdf, PDF s.11 (tablo s.3)"
+  },
+  "efk": {
+   "deger": 15946069,
+   "kaynak": "BIMAS_2025Q4.pdf, PDF s.11 (tablo s.3); Esas faaliyet kârı/(zararı)"
+  },
+  "fingid": {
+   "deger": -8183392,
+   "kaynak": "BIMAS_2025Q4.pdf, PDF s.11 (tablo s.3)"
+  },
+  "vok": {
+   "deger": 31592732,
+   "kaynak": "BIMAS_2025Q4.pdf, PDF s.11 (tablo s.3)"
+  },
+  "netkar": {
+   "deger": 18735256,
+   "kaynak": "BIMAS_2025Q4.pdf, PDF s.11 (tablo s.3)"
+  },
+  "ananetkar": {
+   "deger": 18632108,
+   "kaynak": "BIMAS_2025Q4.pdf, PDF s.11 (tablo s.3)"
+  },
+  "toplamyuk": {
+   "formul": "=kvyk+uvyk",
+   "kaynak": "BIMAS_2025Q4.pdf, PDF s.10 (tablo s.2); raporda ayrı satır yok → KVYK + UVYK"
+  },
+  "paysayisi": {
+   "deger": 600000000,
+   "kaynak": "BIMAS_2025Q4.pdf, Dipnot 17; 'nominal değeri 1 tam TL olan 600.000.000 adet'"
+  }
+ },
+ "BIMAS 2026Q2": {
+  "nakit": {
+   "deger": 4325864,
+   "kaynak": "BIMAS_2026Q2.pdf, PDF s.4 (tablo s.1)"
+  },
+  "kvfy": {
+   "deger": 25879509,
+   "kaynak": "BIMAS_2026Q2.pdf, PDF s.4 (tablo s.1); 'Finansal yatırımlar' (dönen varlıklar)"
+  },
+  "ticalacak": {
+   "deger": 42525418,
+   "kaynak": "BIMAS_2026Q2.pdf, PDF s.4 (tablo s.1); Ticari alacaklar toplamı (ilişkili + ilişkisiz)"
+  },
+  "stok": {
+   "deger": 70884869,
+   "kaynak": "BIMAS_2026Q2.pdf, PDF s.4 (tablo s.1)"
+  },
+  "donen": {
+   "deger": 152411807,
+   "kaynak": "BIMAS_2026Q2.pdf, PDF s.4 (tablo s.1)"
+  },
+  "mdv": {
+   "deger": 159502205,
+   "kaynak": "BIMAS_2026Q2.pdf, PDF s.4 (tablo s.1)"
+  },
+  "duran": {
+   "deger": 276162543,
+   "kaynak": "BIMAS_2026Q2.pdf, PDF s.4 (tablo s.1)"
+  },
+  "toplamvar": {
+   "deger": 428574350,
+   "kaynak": "BIMAS_2026Q2.pdf, PDF s.4 (tablo s.1)"
+  },
+  "ticborc": {
+   "deger": 111496145,
+   "kaynak": "BIMAS_2026Q2.pdf, PDF s.5 (tablo s.2); Ticari borçlar toplamı (ilişkili + ilişkisiz)"
+  },
+  "kvyk": {
+   "deger": 147697793,
+   "kaynak": "BIMAS_2026Q2.pdf, PDF s.5 (tablo s.2)"
+  },
+  "uvyk": {
+   "deger": 77739194,
+   "kaynak": "BIMAS_2026Q2.pdf, PDF s.5 (tablo s.2)"
+  },
+  "ozkaynak": {
+   "deger": 203137363,
+   "kaynak": "BIMAS_2026Q2.pdf, PDF s.5 (tablo s.2)"
+  },
+  "anaozk": {
+   "deger": 201353398,
+   "kaynak": "BIMAS_2026Q2.pdf, PDF s.5 (tablo s.2)"
+  },
+  "sermaye": {
+   "deger": 1200000,
+   "kaynak": "BIMAS_2026Q2.pdf, PDF s.5 (tablo s.2); Ödenmiş sermaye (nominal)"
+  },
+  "hasilat": {
+   "deger": 449695235,
+   "kaynak": "BIMAS_2026Q2.pdf, PDF s.6 (tablo s.3), 1 Ocak–30 Haziran 2026 sütunu"
+  },
+  "smm": {
+   "deger": -363885817,
+   "kaynak": "BIMAS_2026Q2.pdf, PDF s.6 (tablo s.3), 1 Ocak–30 Haziran 2026 sütunu"
+  },
+  "brut": {
+   "deger": 85809418,
+   "kaynak": "BIMAS_2026Q2.pdf, PDF s.6 (tablo s.3), 1 Ocak–30 Haziran 2026 sütunu"
+  },
+  "efk": {
+   "deger": 8049522,
+   "kaynak": "BIMAS_2026Q2.pdf, PDF s.6 (tablo s.3), 1 Ocak–30 Haziran 2026 sütunu; Esas faaliyet kârı/(zararı)"
+  },
+  "fingid": {
+   "deger": -5413450,
+   "kaynak": "BIMAS_2026Q2.pdf, PDF s.6 (tablo s.3), 1 Ocak–30 Haziran 2026 sütunu"
+  },
+  "vok": {
+   "deger": 25455810,
+   "kaynak": "BIMAS_2026Q2.pdf, PDF s.6 (tablo s.3), 1 Ocak–30 Haziran 2026 sütunu"
+  },
+  "netkar": {
+   "deger": 15094815,
+   "kaynak": "BIMAS_2026Q2.pdf, PDF s.6 (tablo s.3), 1 Ocak–30 Haziran 2026 sütunu"
+  },
+  "ananetkar": {
+   "deger": 14934476,
+   "kaynak": "BIMAS_2026Q2.pdf, PDF s.6 (tablo s.3), 1 Ocak–30 Haziran 2026 sütunu"
+  },
+  "toplamyuk": {
+   "formul": "=kvyk+uvyk",
+   "kaynak": "BIMAS_2026Q2.pdf, PDF s.5 (tablo s.2); raporda ayrı satır yok → KVYK + UVYK"
+  },
+  "paysayisi": {
+   "deger": 1200000000,
+   "kaynak": "BIMAS_2026Q2.pdf, Dipnot 17; 1 TL nominal × 1.200.000 bin TL ödenmiş sermaye (2026'da bedelsiz artırım 600.000 → 1.200.000)"
+  }
+ }
+}
