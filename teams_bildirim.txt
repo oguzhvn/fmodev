@@ -1,0 +1,2 @@
+Grup üyeleri: [İsim 1], [İsim 2], [İsim 3], [İsim 4]
+Seçilen şirketler: Migros Ticaret A.Ş. (MGROS) ve rakip firma olarak BİM Birleşik Mağazalar A.Ş. (BIMAS)
