@@ -62,10 +62,10 @@ yellow = PatternFill("solid", fgColor="FFFF00")
 resfill = PatternFill("solid", fgColor="E2EFDA")
 thin = Side(style="thin", color="BFBFBF")
 box = Border(top=thin, bottom=thin, left=thin, right=thin)
-TL = '#,##0;(#,##0);"-"'
-RAT = '0.00;(0.00);"-"'
-DAY = '#,##0.0;(#,##0.0);"-"'
-PCT = '0.0%;(0.0%);"-"'
+TL = '#,##0;-#,##0;"-"'
+RAT = '0.00;-0.00;"-"'
+DAY = '#,##0.0;-#,##0.0;"-"'
+PCT = '0.0%;-0.0%;"-"'
 
 data = {}
 if os.path.exists(DATA_PATH):
@@ -81,8 +81,12 @@ hv["A1"] = "Raw Data – Migros (MGROS) and BİM (BIMAS), consolidated financial
 hv["A1"].font = title
 hv["A2"] = ("All amounts are in TRY thousand, as presented in the reports (except the number of shares). "
             "The reports apply TAS 29 (inflation accounting). For each period, the current-period column of that "
-            "period's own report is used. Blue = figure entered from KAP; yellow = not entered yet.")
+            "period's own report is used. Blue = figure entered from the reports; black = formula. "
+            "Page numbers in the Source columns refer to the PDF page of the English report.")
 hv["A2"].font = ital
+hv["A2"].alignment = Alignment(wrap_text=True, vertical="top")
+hv.merge_cells("A2:I2")
+hv.row_dimensions[2].height = 45
 hdr = ["Item"] + COLS + [f"Source – {c}" for c in COLS]
 for i, h in enumerate(hdr):
     c = hv.cell(row=4, column=i + 1, value=h)
@@ -143,8 +147,8 @@ def H(key, j):
 pr = wb.create_sheet("Parameters")
 pr["A1"] = "Parameters"; pr["A1"].font = title
 pr["A3"] = "Days in a year"; pr["A3"].font = bold
-pr["B3"] = 365; pr["B3"].font = blue; pr["B3"].fill = yellow
-pr["C3"] = "If the course notes use 360 days, change this cell. All day-based ratios are linked to it."
+pr["B3"] = 365; pr["B3"].font = blue; pr["B3"].fill = yellow  # yellow = editable input
+pr["C3"] = "Editable input (yellow). If the course notes use 360 days, change this cell. All day-based ratios are linked to it."
 pr["C3"].font = ital
 for i, h in enumerate(["Parameter", *COLS]):
     c = pr.cell(row=5, column=i + 1, value=h)
@@ -169,6 +173,8 @@ OC = ["D", "E", "F", "G"]   # value columns on ratio sheets
 TC = ["I", "J", "K", "L"]   # "Calculation" text columns on ratio sheets
 RESULT = {}                 # ratio name -> (sheet, row, format)
 DEC = {TL: 0, RAT: 2, DAY: 1, "0": 0, "0.00": 2}
+# inputs inside the calculation text get extra decimals, so that the shown arithmetic adds up
+DEC_IN = {TL: 0, RAT: 4, DAY: 2, "0": 0, "0.00": 2}
 
 def calc_text(formula, row_fmt, res_ref, res_fmt):
     """'=D6/D7' -> =FIXED(D6,0)&" / "&FIXED(D7,0)&" = "&FIXED(D8,2)  (FIXED uses the local separators)"""
@@ -180,7 +186,7 @@ def calc_text(formula, row_fmt, res_ref, res_fmt):
             out.append('" ' + {"-": "−", "*": "×"}.get(t, t) + ' "')
         elif t:
             m = re.match(r"\$?([A-Z]+)\$?(\d+)$", t)
-            d = DEC.get(row_fmt.get(int(m.group(2)), TL), 0) if m else 0
+            d = DEC_IN.get(row_fmt.get(int(m.group(2)), TL), 0) if m else 0
             out.append(f"FIXED({t},{d})")
     out.append('" = "')
     out.append(f"FIXED({res_ref},{DEC.get(res_fmt, 2)})")
@@ -241,7 +247,8 @@ def ref(rowmap, label, j):
 # ---------------- Liquidity ----------------
 lk = wb.create_sheet("Liquidity")
 setup_ratio_sheet(lk, "Liquidity Ratios",
-                  "All values are live formulas linked to the Raw_Data sheet. Period-end balances are used.")
+                  "All values are live formulas linked to the Raw_Data sheet. Period-end balances are used. "
+                  "In the Calculation columns, intermediate ratios are shown with more decimals so that the arithmetic can be followed.")
 r = 5
 r, _ = block(lk, r, "Current Ratio", "Current assets / Current liabilities", [
     ("Numerator: Total current assets", lambda j, m: f"={H('donen', j)}", TL, "link"),
@@ -272,7 +279,8 @@ r, _ = block(lk, r, "Net Working Capital (TRY thousand)", "Current assets − Cu
 fa = wb.create_sheet("Activity")
 setup_ratio_sheet(fa, "Activity Ratios",
                   "Income statement figures are multiplied by the annualization factor (see Parameters): 2025Q4 ×1, "
-                  "2026Q2 ×2. Cost of sales is used as an absolute value. Balance sheet items are period-end balances.")
+                  "2026Q2 ×2. Cost of sales is used as an absolute value. Balance sheet items are period-end balances. "
+                  "In the Calculation columns, intermediate ratios are shown with more decimals.")
 r = 5
 r, Y = block(fa, r, "Annualization (intermediate step)", "Income statement amount × (12 / period length)", [
     ("Revenue (for the period, as reported)", lambda j, m: f"={H('hasilat', j)}", TL, "link"),
@@ -396,6 +404,9 @@ for j in range(4):
     c.font = bold; c.border = box
 kt["A" + str(st + 2)] = ("Note: a tolerance of TRY 1 thousand is allowed for rounding. If a difference appears, "
                          "re-check the Raw_Data entry against the report.")
+kt["A" + str(st + 3)] = ("BIMAS does not report total liabilities as a separate line, so it is calculated as current + "
+                         "non-current liabilities; the third check is therefore 0 by definition for BIMAS.")
+kt["A" + str(st + 3)].font = ital
 kt["A" + str(st + 2)].font = ital
 kt.column_dimensions["A"].width = 62
 for c in PC:

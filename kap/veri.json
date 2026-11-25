@@ -2,393 +2,393 @@
  "MGROS 2025Q4": {
   "nakit": {
    "deger": 27783954,
-   "kaynak": "MGROS_2025Q4_EN.pdf, Statement of Financial Position, p.8"
+   "kaynak": "MGROS_2025Q4_EN.pdf, Statement of Financial Position, PDF p.8"
   },
   "kvfy": {
    "deger": 126509,
-   "kaynak": "MGROS_2025Q4_EN.pdf, Statement of Financial Position, p.8; 'Financial investments' under current assets"
+   "kaynak": "MGROS_2025Q4_EN.pdf, Statement of Financial Position, PDF p.8; 'Financial investments' under current assets"
   },
   "ticalacak": {
    "deger": 2508071,
-   "kaynak": "MGROS_2025Q4_EN.pdf, Statement of Financial Position, p.8; total trade receivables (related + third parties)"
+   "kaynak": "MGROS_2025Q4_EN.pdf, Statement of Financial Position, PDF p.8; total trade receivables (related + third parties)"
   },
   "stok": {
    "deger": 41241056,
-   "kaynak": "MGROS_2025Q4_EN.pdf, Statement of Financial Position, p.8"
+   "kaynak": "MGROS_2025Q4_EN.pdf, Statement of Financial Position, PDF p.8"
   },
   "donen": {
    "deger": 76260429,
-   "kaynak": "MGROS_2025Q4_EN.pdf, Statement of Financial Position, p.8"
+   "kaynak": "MGROS_2025Q4_EN.pdf, Statement of Financial Position, PDF p.8"
   },
   "mdv": {
    "deger": 48302284,
-   "kaynak": "MGROS_2025Q4_EN.pdf, Statement of Financial Position, p.8"
+   "kaynak": "MGROS_2025Q4_EN.pdf, Statement of Financial Position, PDF p.8"
   },
   "duran": {
    "deger": 133322850,
-   "kaynak": "MGROS_2025Q4_EN.pdf, Statement of Financial Position, p.8"
+   "kaynak": "MGROS_2025Q4_EN.pdf, Statement of Financial Position, PDF p.8"
   },
   "toplamvar": {
    "deger": 209583279,
-   "kaynak": "MGROS_2025Q4_EN.pdf, Statement of Financial Position, p.8"
+   "kaynak": "MGROS_2025Q4_EN.pdf, Statement of Financial Position, PDF p.8"
   },
   "ticborc": {
    "deger": 79822747,
-   "kaynak": "MGROS_2025Q4_EN.pdf, Statement of Financial Position, p.9; total trade payables (related + third parties)"
+   "kaynak": "MGROS_2025Q4_EN.pdf, Statement of Financial Position, PDF p.9; total trade payables (related + third parties)"
   },
   "kvyk": {
    "deger": 96259374,
-   "kaynak": "MGROS_2025Q4_EN.pdf, Statement of Financial Position, p.9"
+   "kaynak": "MGROS_2025Q4_EN.pdf, Statement of Financial Position, PDF p.9"
   },
   "uvyk": {
    "deger": 33411199,
-   "kaynak": "MGROS_2025Q4_EN.pdf, Statement of Financial Position, p.9"
+   "kaynak": "MGROS_2025Q4_EN.pdf, Statement of Financial Position, PDF p.9"
   },
   "toplamyuk": {
    "deger": 129670573,
-   "kaynak": "MGROS_2025Q4_EN.pdf, Statement of Financial Position, p.9"
+   "kaynak": "MGROS_2025Q4_EN.pdf, Statement of Financial Position, PDF p.9"
   },
   "ozkaynak": {
    "deger": 79912706,
-   "kaynak": "MGROS_2025Q4_EN.pdf, Statement of Financial Position, p.10"
+   "kaynak": "MGROS_2025Q4_EN.pdf, Statement of Financial Position, PDF p.10"
   },
   "anaozk": {
    "deger": 79034025,
-   "kaynak": "MGROS_2025Q4_EN.pdf, Statement of Financial Position, p.10"
+   "kaynak": "MGROS_2025Q4_EN.pdf, Statement of Financial Position, PDF p.10"
   },
   "sermaye": {
    "deger": 181054,
-   "kaynak": "MGROS_2025Q4_EN.pdf, Statement of Financial Position, p.10; nominal paid-in capital"
+   "kaynak": "MGROS_2025Q4_EN.pdf, Statement of Financial Position, PDF p.10; nominal paid-in capital"
   },
   "hasilat": {
    "deger": 412756429,
-   "kaynak": "MGROS_2025Q4_EN.pdf, Statement of Profit or Loss, p.11"
+   "kaynak": "MGROS_2025Q4_EN.pdf, Statement of Profit or Loss, PDF p.11"
   },
   "smm": {
    "deger": -312409547,
-   "kaynak": "MGROS_2025Q4_EN.pdf, Statement of Profit or Loss, p.11"
+   "kaynak": "MGROS_2025Q4_EN.pdf, Statement of Profit or Loss, PDF p.11"
   },
   "brut": {
    "deger": 100346882,
-   "kaynak": "MGROS_2025Q4_EN.pdf, Statement of Profit or Loss, p.11"
+   "kaynak": "MGROS_2025Q4_EN.pdf, Statement of Profit or Loss, PDF p.11"
   },
   "efk": {
    "deger": -8252604,
-   "kaynak": "MGROS_2025Q4_EN.pdf, Statement of Profit or Loss, p.11; 'Operating profit/(loss)'"
+   "kaynak": "MGROS_2025Q4_EN.pdf, Statement of Profit or Loss, PDF p.11; 'Operating loss' line"
   },
   "fingid": {
    "deger": -12068915,
-   "kaynak": "MGROS_2025Q4_EN.pdf, Statement of Profit or Loss, p.11"
+   "kaynak": "MGROS_2025Q4_EN.pdf, Statement of Profit or Loss, PDF p.11"
   },
   "vok": {
    "deger": 9310371,
-   "kaynak": "MGROS_2025Q4_EN.pdf, Statement of Profit or Loss, p.11"
+   "kaynak": "MGROS_2025Q4_EN.pdf, Statement of Profit or Loss, PDF p.11"
   },
   "netkar": {
    "deger": 6793533,
-   "kaynak": "MGROS_2025Q4_EN.pdf, Statement of Profit or Loss, p.11"
+   "kaynak": "MGROS_2025Q4_EN.pdf, Statement of Profit or Loss, PDF p.11"
   },
   "ananetkar": {
    "deger": 6467130,
-   "kaynak": "MGROS_2025Q4_EN.pdf, Statement of Profit or Loss, p.11; attributable to owners of the parent"
+   "kaynak": "MGROS_2025Q4_EN.pdf, Statement of Profit or Loss, PDF p.11; attributable to owners of the parent"
   },
   "paysayisi": {
    "deger": 181054000,
-   "kaynak": "MGROS_2025Q4_EN.pdf, Note 23, p.64; 181,054,000 shares of TRY 1 nominal value"
+   "kaynak": "MGROS_2025Q4_EN.pdf, Note 23, PDF p.64: issued capital TRY 181,054 thousand → 181,054,000 shares of TRY 1 (the note mentions a 1 Kr par value, but the dividend note refers to shares of TRY 1.00 nominal value; EPS in Note 25 is consistent with 181.05m shares)"
   }
  },
  "MGROS 2026Q2": {
   "nakit": {
    "deger": 32550445,
-   "kaynak": "MGROS_2026Q2_EN.pdf, Statement of Financial Position, p.5"
+   "kaynak": "MGROS_2026Q2_EN.pdf, Statement of Financial Position, PDF p.5"
   },
   "kvfy": {
    "deger": 27126,
-   "kaynak": "MGROS_2026Q2_EN.pdf, Statement of Financial Position, p.5; 'Financial investments' under current assets"
+   "kaynak": "MGROS_2026Q2_EN.pdf, Statement of Financial Position, PDF p.5; 'Financial investments' under current assets"
   },
   "ticalacak": {
    "deger": 2498840,
-   "kaynak": "MGROS_2026Q2_EN.pdf, Statement of Financial Position, p.5; total trade receivables (related + third parties)"
+   "kaynak": "MGROS_2026Q2_EN.pdf, Statement of Financial Position, PDF p.5; total trade receivables (related + third parties)"
   },
   "stok": {
    "deger": 48763579,
-   "kaynak": "MGROS_2026Q2_EN.pdf, Statement of Financial Position, p.5"
+   "kaynak": "MGROS_2026Q2_EN.pdf, Statement of Financial Position, PDF p.5"
   },
   "donen": {
    "deger": 88377363,
-   "kaynak": "MGROS_2026Q2_EN.pdf, Statement of Financial Position, p.5"
+   "kaynak": "MGROS_2026Q2_EN.pdf, Statement of Financial Position, PDF p.5"
   },
   "mdv": {
    "deger": 58247203,
-   "kaynak": "MGROS_2026Q2_EN.pdf, Statement of Financial Position, p.5"
+   "kaynak": "MGROS_2026Q2_EN.pdf, Statement of Financial Position, PDF p.5"
   },
   "duran": {
    "deger": 161696317,
-   "kaynak": "MGROS_2026Q2_EN.pdf, Statement of Financial Position, p.5"
+   "kaynak": "MGROS_2026Q2_EN.pdf, Statement of Financial Position, PDF p.5"
   },
   "toplamvar": {
    "deger": 250073680,
-   "kaynak": "MGROS_2026Q2_EN.pdf, Statement of Financial Position, p.5"
+   "kaynak": "MGROS_2026Q2_EN.pdf, Statement of Financial Position, PDF p.5"
   },
   "ticborc": {
    "deger": 89449319,
-   "kaynak": "MGROS_2026Q2_EN.pdf, Statement of Financial Position, p.6; total trade payables (related + third parties)"
+   "kaynak": "MGROS_2026Q2_EN.pdf, Statement of Financial Position, PDF p.6; total trade payables (related + third parties)"
   },
   "kvyk": {
    "deger": 110563173,
-   "kaynak": "MGROS_2026Q2_EN.pdf, Statement of Financial Position, p.6"
+   "kaynak": "MGROS_2026Q2_EN.pdf, Statement of Financial Position, PDF p.6"
   },
   "uvyk": {
    "deger": 45582133,
-   "kaynak": "MGROS_2026Q2_EN.pdf, Statement of Financial Position, p.6"
+   "kaynak": "MGROS_2026Q2_EN.pdf, Statement of Financial Position, PDF p.6"
   },
   "toplamyuk": {
    "deger": 156145306,
-   "kaynak": "MGROS_2026Q2_EN.pdf, Statement of Financial Position, p.6"
+   "kaynak": "MGROS_2026Q2_EN.pdf, Statement of Financial Position, PDF p.6"
   },
   "ozkaynak": {
    "deger": 93928374,
-   "kaynak": "MGROS_2026Q2_EN.pdf, Statement of Financial Position, p.7"
+   "kaynak": "MGROS_2026Q2_EN.pdf, Statement of Financial Position, PDF p.7"
   },
   "anaozk": {
    "deger": 92914971,
-   "kaynak": "MGROS_2026Q2_EN.pdf, Statement of Financial Position, p.7"
+   "kaynak": "MGROS_2026Q2_EN.pdf, Statement of Financial Position, PDF p.7"
   },
   "sermaye": {
    "deger": 181054,
-   "kaynak": "MGROS_2026Q2_EN.pdf, Statement of Financial Position, p.7; nominal paid-in capital"
+   "kaynak": "MGROS_2026Q2_EN.pdf, Statement of Financial Position, PDF p.7; nominal paid-in capital"
   },
   "hasilat": {
    "deger": 241298039,
-   "kaynak": "MGROS_2026Q2_EN.pdf, Statement of Profit or Loss, p.8, 1 Jan–30 Jun 2026 column"
+   "kaynak": "MGROS_2026Q2_EN.pdf, Statement of Profit or Loss, PDF p.8, 1 Jan–30 Jun 2026 column"
   },
   "smm": {
    "deger": -185545479,
-   "kaynak": "MGROS_2026Q2_EN.pdf, Statement of Profit or Loss, p.8, 1 Jan–30 Jun 2026 column"
+   "kaynak": "MGROS_2026Q2_EN.pdf, Statement of Profit or Loss, PDF p.8, 1 Jan–30 Jun 2026 column"
   },
   "brut": {
    "deger": 55752560,
-   "kaynak": "MGROS_2026Q2_EN.pdf, Statement of Profit or Loss, p.8, 1 Jan–30 Jun 2026 column"
+   "kaynak": "MGROS_2026Q2_EN.pdf, Statement of Profit or Loss, PDF p.8, 1 Jan–30 Jun 2026 column"
   },
   "efk": {
    "deger": -10858537,
-   "kaynak": "MGROS_2026Q2_EN.pdf, Statement of Profit or Loss, p.8, 1 Jan–30 Jun 2026 column; 'Operating profit/(loss)'"
+   "kaynak": "MGROS_2026Q2_EN.pdf, Statement of Profit or Loss, PDF p.8, 1 Jan–30 Jun 2026 column; 'Operating loss' line"
   },
   "fingid": {
    "deger": -5938018,
-   "kaynak": "MGROS_2026Q2_EN.pdf, Statement of Profit or Loss, p.8, 1 Jan–30 Jun 2026 column"
+   "kaynak": "MGROS_2026Q2_EN.pdf, Statement of Profit or Loss, PDF p.8, 1 Jan–30 Jun 2026 column"
   },
   "vok": {
    "deger": 2662158,
-   "kaynak": "MGROS_2026Q2_EN.pdf, Statement of Profit or Loss, p.8, 1 Jan–30 Jun 2026 column"
+   "kaynak": "MGROS_2026Q2_EN.pdf, Statement of Profit or Loss, PDF p.8, 1 Jan–30 Jun 2026 column"
   },
   "netkar": {
    "deger": 1078256,
-   "kaynak": "MGROS_2026Q2_EN.pdf, Statement of Profit or Loss, p.8, 1 Jan–30 Jun 2026 column"
+   "kaynak": "MGROS_2026Q2_EN.pdf, Statement of Profit or Loss, PDF p.8, 1 Jan–30 Jun 2026 column"
   },
   "ananetkar": {
    "deger": 1010950,
-   "kaynak": "MGROS_2026Q2_EN.pdf, Statement of Profit or Loss, p.8, 1 Jan–30 Jun 2026 column; attributable to owners of the parent"
+   "kaynak": "MGROS_2026Q2_EN.pdf, Statement of Profit or Loss, PDF p.8, 1 Jan–30 Jun 2026 column; attributable to owners of the parent"
   },
   "paysayisi": {
    "deger": 181054000,
-   "kaynak": "MGROS_2026Q2_EN.pdf, Note 17, p.39; 181,054,000 shares of TRY 1 nominal value"
+   "kaynak": "MGROS_2026Q2_EN.pdf, Note 17, PDF p.39: issued capital TRY 181,054 thousand → 181,054,000 shares of TRY 1 (the note mentions a 1 Kr par value, but the dividend note refers to shares of TRY 1.00 nominal value)"
   }
  },
  "BIMAS 2025Q4": {
   "nakit": {
    "deger": 3460632,
-   "kaynak": "BIMAS_2025Q4_EN.pdf, Statement of Financial Position, p.9"
+   "kaynak": "BIMAS_2025Q4_EN.pdf, Statement of Financial Position, PDF p.9"
   },
   "kvfy": {
    "deger": 10691262,
-   "kaynak": "BIMAS_2025Q4_EN.pdf, Statement of Financial Position, p.9; 'Financial investments' under current assets"
+   "kaynak": "BIMAS_2025Q4_EN.pdf, Statement of Financial Position, PDF p.9; 'Financial investments' under current assets"
   },
   "ticalacak": {
    "deger": 34807293,
-   "kaynak": "BIMAS_2025Q4_EN.pdf, Statement of Financial Position, p.9; total trade receivables (related + third parties)"
+   "kaynak": "BIMAS_2025Q4_EN.pdf, Statement of Financial Position, PDF p.9; trade receivables (only third-party receivables are reported)"
   },
   "stok": {
    "deger": 54447493,
-   "kaynak": "BIMAS_2025Q4_EN.pdf, Statement of Financial Position, p.9"
+   "kaynak": "BIMAS_2025Q4_EN.pdf, Statement of Financial Position, PDF p.9"
   },
   "donen": {
    "deger": 111487229,
-   "kaynak": "BIMAS_2025Q4_EN.pdf, Statement of Financial Position, p.9"
+   "kaynak": "BIMAS_2025Q4_EN.pdf, Statement of Financial Position, PDF p.9"
   },
   "mdv": {
    "deger": 131607587,
-   "kaynak": "BIMAS_2025Q4_EN.pdf, Statement of Financial Position, p.9"
+   "kaynak": "BIMAS_2025Q4_EN.pdf, Statement of Financial Position, PDF p.9"
   },
   "duran": {
    "deger": 226606155,
-   "kaynak": "BIMAS_2025Q4_EN.pdf, Statement of Financial Position, p.9"
+   "kaynak": "BIMAS_2025Q4_EN.pdf, Statement of Financial Position, PDF p.9"
   },
   "toplamvar": {
    "deger": 338093384,
-   "kaynak": "BIMAS_2025Q4_EN.pdf, Statement of Financial Position, p.9"
+   "kaynak": "BIMAS_2025Q4_EN.pdf, Statement of Financial Position, PDF p.9"
   },
   "ticborc": {
    "deger": 86532656,
-   "kaynak": "BIMAS_2025Q4_EN.pdf, Statement of Financial Position, p.10; total trade payables (related + third parties)"
+   "kaynak": "BIMAS_2025Q4_EN.pdf, Statement of Financial Position, PDF p.10; total trade payables (related + third parties)"
   },
   "kvyk": {
    "deger": 108356980,
-   "kaynak": "BIMAS_2025Q4_EN.pdf, Statement of Financial Position, p.10"
+   "kaynak": "BIMAS_2025Q4_EN.pdf, Statement of Financial Position, PDF p.10"
   },
   "uvyk": {
    "deger": 62641837,
-   "kaynak": "BIMAS_2025Q4_EN.pdf, Statement of Financial Position, p.10"
+   "kaynak": "BIMAS_2025Q4_EN.pdf, Statement of Financial Position, PDF p.10"
   },
   "ozkaynak": {
    "deger": 167094567,
-   "kaynak": "BIMAS_2025Q4_EN.pdf, Statement of Financial Position, p.10"
+   "kaynak": "BIMAS_2025Q4_EN.pdf, Statement of Financial Position, PDF p.10"
   },
   "anaozk": {
    "deger": 165584579,
-   "kaynak": "BIMAS_2025Q4_EN.pdf, Statement of Financial Position, p.10"
+   "kaynak": "BIMAS_2025Q4_EN.pdf, Statement of Financial Position, PDF p.10"
   },
   "sermaye": {
    "deger": 600000,
-   "kaynak": "BIMAS_2025Q4_EN.pdf, Statement of Financial Position, p.10; nominal paid-in capital"
+   "kaynak": "BIMAS_2025Q4_EN.pdf, Statement of Financial Position, PDF p.10; nominal paid-in capital"
   },
   "hasilat": {
    "deger": 721062506,
-   "kaynak": "BIMAS_2025Q4_EN.pdf, Statement of Profit or Loss, p.11"
+   "kaynak": "BIMAS_2025Q4_EN.pdf, Statement of Profit or Loss, PDF p.11"
   },
   "smm": {
    "deger": -581615796,
-   "kaynak": "BIMAS_2025Q4_EN.pdf, Statement of Profit or Loss, p.11"
+   "kaynak": "BIMAS_2025Q4_EN.pdf, Statement of Profit or Loss, PDF p.11"
   },
   "brut": {
    "deger": 139446710,
-   "kaynak": "BIMAS_2025Q4_EN.pdf, Statement of Profit or Loss, p.11"
+   "kaynak": "BIMAS_2025Q4_EN.pdf, Statement of Profit or Loss, PDF p.11"
   },
   "efk": {
    "deger": 15946069,
-   "kaynak": "BIMAS_2025Q4_EN.pdf, Statement of Profit or Loss, p.11; 'Operating profit/(loss)'"
+   "kaynak": "BIMAS_2025Q4_EN.pdf, Statement of Profit or Loss, PDF p.11; 'Operating profit' line"
   },
   "fingid": {
    "deger": -8183392,
-   "kaynak": "BIMAS_2025Q4_EN.pdf, Statement of Profit or Loss, p.11"
+   "kaynak": "BIMAS_2025Q4_EN.pdf, Statement of Profit or Loss, PDF p.11"
   },
   "vok": {
    "deger": 31592732,
-   "kaynak": "BIMAS_2025Q4_EN.pdf, Statement of Profit or Loss, p.11"
+   "kaynak": "BIMAS_2025Q4_EN.pdf, Statement of Profit or Loss, PDF p.11"
   },
   "netkar": {
    "deger": 18735256,
-   "kaynak": "BIMAS_2025Q4_EN.pdf, Statement of Profit or Loss, p.11"
+   "kaynak": "BIMAS_2025Q4_EN.pdf, Statement of Profit or Loss, PDF p.11"
   },
   "ananetkar": {
    "deger": 18632108,
-   "kaynak": "BIMAS_2025Q4_EN.pdf, Statement of Profit or Loss, p.11; attributable to owners of the parent"
+   "kaynak": "BIMAS_2025Q4_EN.pdf, Statement of Profit or Loss, PDF p.11; attributable to owners of the parent"
   },
   "toplamyuk": {
    "formul": "=kvyk+uvyk",
-   "kaynak": "BIMAS_2025Q4_EN.pdf, p.10; not reported as a separate line, calculated as current + non-current liabilities"
+   "kaynak": "BIMAS_2025Q4_EN.pdf, PDF p.10; not reported as a separate line, calculated as current + non-current liabilities"
   },
   "paysayisi": {
    "deger": 600000000,
-   "kaynak": "BIMAS_2025Q4_EN.pdf, Note 17, p.46; '600,000,000 shares of TRY 1 nominal value each'"
+   "kaynak": "BIMAS_2025Q4_EN.pdf, Note 17, PDF p.46; '600,000,000 shares of TRY 1 nominal value each'"
   }
  },
  "BIMAS 2026Q2": {
   "nakit": {
    "deger": 4325864,
-   "kaynak": "BIMAS_2026Q2_EN.pdf, Statement of Financial Position, p.4"
+   "kaynak": "BIMAS_2026Q2_EN.pdf, Statement of Financial Position, PDF p.4"
   },
   "kvfy": {
    "deger": 25879509,
-   "kaynak": "BIMAS_2026Q2_EN.pdf, Statement of Financial Position, p.4; 'Financial investments' under current assets"
+   "kaynak": "BIMAS_2026Q2_EN.pdf, Statement of Financial Position, PDF p.4; 'Financial investments' under current assets"
   },
   "ticalacak": {
    "deger": 42525418,
-   "kaynak": "BIMAS_2026Q2_EN.pdf, Statement of Financial Position, p.4; total trade receivables (related + third parties)"
+   "kaynak": "BIMAS_2026Q2_EN.pdf, Statement of Financial Position, PDF p.4; trade receivables (only third-party receivables are reported)"
   },
   "stok": {
    "deger": 70884869,
-   "kaynak": "BIMAS_2026Q2_EN.pdf, Statement of Financial Position, p.4"
+   "kaynak": "BIMAS_2026Q2_EN.pdf, Statement of Financial Position, PDF p.4"
   },
   "donen": {
    "deger": 152411807,
-   "kaynak": "BIMAS_2026Q2_EN.pdf, Statement of Financial Position, p.4"
+   "kaynak": "BIMAS_2026Q2_EN.pdf, Statement of Financial Position, PDF p.4"
   },
   "mdv": {
    "deger": 159502205,
-   "kaynak": "BIMAS_2026Q2_EN.pdf, Statement of Financial Position, p.4"
+   "kaynak": "BIMAS_2026Q2_EN.pdf, Statement of Financial Position, PDF p.4"
   },
   "duran": {
    "deger": 276162543,
-   "kaynak": "BIMAS_2026Q2_EN.pdf, Statement of Financial Position, p.4"
+   "kaynak": "BIMAS_2026Q2_EN.pdf, Statement of Financial Position, PDF p.4"
   },
   "toplamvar": {
    "deger": 428574350,
-   "kaynak": "BIMAS_2026Q2_EN.pdf, Statement of Financial Position, p.4"
+   "kaynak": "BIMAS_2026Q2_EN.pdf, Statement of Financial Position, PDF p.4"
   },
   "ticborc": {
    "deger": 111496145,
-   "kaynak": "BIMAS_2026Q2_EN.pdf, Statement of Financial Position, p.5; total trade payables (related + third parties)"
+   "kaynak": "BIMAS_2026Q2_EN.pdf, Statement of Financial Position, PDF p.5; total trade payables (related + third parties)"
   },
   "kvyk": {
    "deger": 147697793,
-   "kaynak": "BIMAS_2026Q2_EN.pdf, Statement of Financial Position, p.5"
+   "kaynak": "BIMAS_2026Q2_EN.pdf, Statement of Financial Position, PDF p.5"
   },
   "uvyk": {
    "deger": 77739194,
-   "kaynak": "BIMAS_2026Q2_EN.pdf, Statement of Financial Position, p.5"
+   "kaynak": "BIMAS_2026Q2_EN.pdf, Statement of Financial Position, PDF p.5"
   },
   "ozkaynak": {
    "deger": 203137363,
-   "kaynak": "BIMAS_2026Q2_EN.pdf, Statement of Financial Position, p.5"
+   "kaynak": "BIMAS_2026Q2_EN.pdf, Statement of Financial Position, PDF p.5"
   },
   "anaozk": {
    "deger": 201353398,
-   "kaynak": "BIMAS_2026Q2_EN.pdf, Statement of Financial Position, p.5"
+   "kaynak": "BIMAS_2026Q2_EN.pdf, Statement of Financial Position, PDF p.5"
   },
   "sermaye": {
    "deger": 1200000,
-   "kaynak": "BIMAS_2026Q2_EN.pdf, Statement of Financial Position, p.5; nominal paid-in capital"
+   "kaynak": "BIMAS_2026Q2_EN.pdf, Statement of Financial Position, PDF p.5; nominal paid-in capital"
   },
   "hasilat": {
    "deger": 449695235,
-   "kaynak": "BIMAS_2026Q2_EN.pdf, Statement of Profit or Loss, p.6, 1 Jan–30 Jun 2026 column"
+   "kaynak": "BIMAS_2026Q2_EN.pdf, Statement of Profit or Loss, PDF p.6, 1 Jan–30 Jun 2026 column"
   },
   "smm": {
    "deger": -363885817,
-   "kaynak": "BIMAS_2026Q2_EN.pdf, Statement of Profit or Loss, p.6, 1 Jan–30 Jun 2026 column"
+   "kaynak": "BIMAS_2026Q2_EN.pdf, Statement of Profit or Loss, PDF p.6, 1 Jan–30 Jun 2026 column"
   },
   "brut": {
    "deger": 85809418,
-   "kaynak": "BIMAS_2026Q2_EN.pdf, Statement of Profit or Loss, p.6, 1 Jan–30 Jun 2026 column"
+   "kaynak": "BIMAS_2026Q2_EN.pdf, Statement of Profit or Loss, PDF p.6, 1 Jan–30 Jun 2026 column"
   },
   "efk": {
    "deger": 8049522,
-   "kaynak": "BIMAS_2026Q2_EN.pdf, Statement of Profit or Loss, p.6, 1 Jan–30 Jun 2026 column; 'Operating profit/(loss)'"
+   "kaynak": "BIMAS_2026Q2_EN.pdf, Statement of Profit or Loss, PDF p.6, 1 Jan–30 Jun 2026 column; 'Operating profit' line"
   },
   "fingid": {
    "deger": -5413450,
-   "kaynak": "BIMAS_2026Q2_EN.pdf, Statement of Profit or Loss, p.6, 1 Jan–30 Jun 2026 column"
+   "kaynak": "BIMAS_2026Q2_EN.pdf, Statement of Profit or Loss, PDF p.6, 1 Jan–30 Jun 2026 column"
   },
   "vok": {
    "deger": 25455810,
-   "kaynak": "BIMAS_2026Q2_EN.pdf, Statement of Profit or Loss, p.6, 1 Jan–30 Jun 2026 column"
+   "kaynak": "BIMAS_2026Q2_EN.pdf, Statement of Profit or Loss, PDF p.6, 1 Jan–30 Jun 2026 column"
   },
   "netkar": {
    "deger": 15094815,
-   "kaynak": "BIMAS_2026Q2_EN.pdf, Statement of Profit or Loss, p.6, 1 Jan–30 Jun 2026 column"
+   "kaynak": "BIMAS_2026Q2_EN.pdf, Statement of Profit or Loss, PDF p.6, 1 Jan–30 Jun 2026 column"
   },
   "ananetkar": {
    "deger": 14934476,
-   "kaynak": "BIMAS_2026Q2_EN.pdf, Statement of Profit or Loss, p.6, 1 Jan–30 Jun 2026 column; attributable to owners of the parent"
+   "kaynak": "BIMAS_2026Q2_EN.pdf, Statement of Profit or Loss, PDF p.6, 1 Jan–30 Jun 2026 column; attributable to owners of the parent"
   },
   "toplamyuk": {
    "formul": "=kvyk+uvyk",
-   "kaynak": "BIMAS_2026Q2_EN.pdf, p.5; not reported as a separate line, calculated as current + non-current liabilities"
+   "kaynak": "BIMAS_2026Q2_EN.pdf, PDF p.5; not reported as a separate line, calculated as current + non-current liabilities"
   },
   "paysayisi": {
    "deger": 1200000000,
-   "kaynak": "BIMAS_2026Q2_EN.pdf, Note 17, p.41; capital increased from TRY 600,000,000 to TRY 1,200,000,000 through a bonus issue"
+   "kaynak": "BIMAS_2026Q2_EN.pdf, Note 17, PDF p.41; capital increased from TRY 600,000,000 to TRY 1,200,000,000 through a bonus issue"
   }
  }
 }
