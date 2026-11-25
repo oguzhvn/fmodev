@@ -1,50 +1,51 @@
-"""FM_Proje_MGROS_BIMAS.xlsx oluşturur.
-Ham rakamlar kap/veri.json dosyasından okunur (KAP raporlarından elle/PDF'ten alınan değerler).
-Dosya yoksa ya da bir değer boşsa hücre boş (sarı) bırakılır.
+"""Builds FM_Project_MGROS_BIMAS.xlsx.
+
+Raw figures are read from kap/veri.json (values taken from the KAP financial reports).
+If the file or a value is missing, the cell is left empty and highlighted in yellow.
 """
-import json, os, sys
+import json, os, re
 from openpyxl import Workbook
 from openpyxl.styles import Font, PatternFill, Alignment, Border, Side
 from openpyxl.utils import get_column_letter as L
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 DATA_PATH = os.path.join(ROOT, "kap", "veri.json")
-OUT = os.path.join(ROOT, "FM_Proje_MGROS_BIMAS.xlsx")
+OUT = os.path.join(ROOT, "FM_Project_MGROS_BIMAS.xlsx")
 
 COLS = ["MGROS 2025Q4", "MGROS 2026Q2", "BIMAS 2025Q4", "BIMAS 2026Q2"]
-VC = ["B", "C", "D", "E"]          # Ham_Veri değer sütunları
-SC = ["F", "G", "H", "I"]          # Ham_Veri kaynak sütunları
+VC = ["B", "C", "D", "E"]          # Raw_Data value columns
+SC = ["F", "G", "H", "I"]          # Raw_Data source columns
 
-# (anahtar, etiket, bölüm)
+# (key, label)  key "H" = section heading
 ITEMS = [
-    ("H", "BİLANÇO (bin TL)", None),
-    ("nakit", "Nakit ve nakit benzerleri", "b"),
-    ("kvfy", "Kısa vadeli finansal yatırımlar", "b"),
-    ("ticalacak", "Ticari alacaklar (kısa vadeli)", "b"),
-    ("stok", "Stoklar", "b"),
-    ("donen", "Toplam dönen varlıklar", "b"),
-    ("mdv", "Maddi duran varlıklar", "b"),
-    ("duran", "Toplam duran varlıklar", "b"),
-    ("toplamvar", "Toplam varlıklar", "b"),
-    ("ticborc", "Ticari borçlar (kısa vadeli)", "b"),
-    ("kvyk", "Toplam kısa vadeli yükümlülükler", "b"),
-    ("uvyk", "Toplam uzun vadeli yükümlülükler", "b"),
-    ("toplamyuk", "Toplam yükümlülükler", "b"),
-    ("ozkaynak", "Toplam özkaynaklar", "b"),
-    ("anaozk", "Ana ortaklığa ait özkaynaklar", "b"),
-    ("sermaye", "Ödenmiş sermaye (bin TL)", "b"),
-    ("paysayisi", "Pay sayısı (adet)", "b"),
-    ("H", "GELİR TABLOSU (bin TL, KAP işaretleriyle; giderler negatif)", None),
-    ("hasilat", "Hasılat", "g"),
-    ("smm", "Satışların maliyeti (-)", "g"),
-    ("brut", "Brüt kâr", "g"),
-    ("efk", "Esas faaliyet kârı", "g"),
-    ("fingid", "Finansman giderleri (-)", "g"),
-    ("vok", "Vergi öncesi kâr", "g"),
-    ("netkar", "Dönem net kârı", "g"),
-    ("ananetkar", "Ana ortaklığa ait net kâr", "g"),
-    ("H", "DÖNEM BİLGİSİ", None),
-    ("ay", "Gelir tablosu dönem uzunluğu (ay)", "p"),
+    ("H", "STATEMENT OF FINANCIAL POSITION (TRY thousand)"),
+    ("nakit", "Cash and cash equivalents"),
+    ("kvfy", "Short-term financial investments"),
+    ("ticalacak", "Trade receivables (current)"),
+    ("stok", "Inventories"),
+    ("donen", "Total current assets"),
+    ("mdv", "Property, plant and equipment"),
+    ("duran", "Total non-current assets"),
+    ("toplamvar", "Total assets"),
+    ("ticborc", "Trade payables (current)"),
+    ("kvyk", "Total current liabilities"),
+    ("uvyk", "Total non-current liabilities"),
+    ("toplamyuk", "Total liabilities"),
+    ("ozkaynak", "Total equity"),
+    ("anaozk", "Equity attributable to owners of the parent"),
+    ("sermaye", "Paid-in capital (TRY thousand)"),
+    ("paysayisi", "Number of shares (units)"),
+    ("H", "STATEMENT OF PROFIT OR LOSS (TRY thousand; expenses shown as negative, as reported)"),
+    ("hasilat", "Revenue"),
+    ("smm", "Cost of sales (-)"),
+    ("brut", "Gross profit"),
+    ("efk", "Operating profit / (loss)"),
+    ("fingid", "Finance expenses (-)"),
+    ("vok", "Profit before tax"),
+    ("netkar", "Net profit for the period"),
+    ("ananetkar", "Net profit attributable to owners of the parent"),
+    ("H", "PERIOD INFORMATION"),
+    ("ay", "Income statement period length (months)"),
 ]
 
 F = "Arial"
@@ -73,49 +74,49 @@ if os.path.exists(DATA_PATH):
 
 wb = Workbook()
 
-# ---------------- Ham_Veri ----------------
+# ---------------- Raw_Data ----------------
 hv = wb.active
-hv.title = "Ham_Veri"
-hv["A1"] = "Ham Veri — Migros (MGROS) ve BİM (BIMAS), KAP konsolide finansal raporları"
+hv.title = "Raw_Data"
+hv["A1"] = "Raw Data – Migros (MGROS) and BİM (BIMAS), consolidated financial reports published on KAP"
 hv["A1"].font = title
-hv["A2"] = ("Tutarlar bin TL (raporlardaki gibi; pay sayısı hariç). TMS 29 enflasyon muhasebesi uygulanmış raporlar; her dönem için o dönemin kendi "
-            "raporundaki cari dönem sütunu kullanılmıştır. Mavi = elle girilen KAP verisi, sarı = henüz girilmedi.")
+hv["A2"] = ("All amounts are in TRY thousand, as presented in the reports (except the number of shares). "
+            "The reports apply TAS 29 (inflation accounting). For each period, the current-period column of that "
+            "period's own report is used. Blue = figure entered from KAP; yellow = not entered yet.")
 hv["A2"].font = ital
-hdr = ["Kalem"] + COLS + [f"Kaynak – {c}" for c in COLS]
+hdr = ["Item"] + COLS + [f"Source – {c}" for c in COLS]
 for i, h in enumerate(hdr):
     c = hv.cell(row=4, column=i + 1, value=h)
     c.font, c.fill, c.alignment, c.border = hdrfont, hdrfill, Alignment(horizontal="center", wrap_text=True), box
 ROW = {}
-ROWS_ALL = {}
 _r = 5
-for _k, _l, _s in ITEMS:
+for _k, _l in ITEMS:
     if _k != "H":
-        ROWS_ALL[_k] = _r
+        ROW[_k] = _r
     _r += 1
 r = 5
-for key, label, sec in ITEMS:
+for key, label in ITEMS:
     if key == "H":
         hv.cell(row=r, column=1, value=label).font = bold
         for col in range(1, 10):
             hv.cell(row=r, column=col).fill = secfill
         r += 1
         continue
-    ROW[key] = r
     hv.cell(row=r, column=1, value=label).font = norm
     for j, col in enumerate(COLS):
         cell = hv[f"{VC[j]}{r}"]
         src = hv[f"{SC[j]}{r}"]
         if key == "ay":
             cell.value = 12 if col.endswith("Q4") else 6
-            src.value = "2025Q4: 01.01–31.12.2025 (12 ay); 2026Q2: 01.01–30.06.2026 (6 ay)"
+            src.value = ("1 Jan – 31 Dec 2025 (12 months)" if col.endswith("Q4")
+                         else "1 Jan – 30 Jun 2026 (6 months)")
             cell.font = blue
         else:
             d = data.get(col, {}).get(key)
             if d is not None and d.get("formul"):
-                f = d["formul"]
-                for k2 in sorted(ROWS_ALL, key=len, reverse=True):
-                    f = f.replace(k2, f"{VC[j]}{ROWS_ALL[k2]}")
-                cell.value = f
+                fml = d["formul"]
+                for k2 in sorted(ROW, key=len, reverse=True):
+                    fml = fml.replace(k2, f"{VC[j]}{ROW[k2]}")
+                cell.value = fml
                 src.value = d.get("kaynak", "")
             elif d is not None and d.get("deger") is not None:
                 cell.value = d["deger"]
@@ -128,27 +129,28 @@ for key, label, sec in ITEMS:
         src.font = Font(name=F, size=9)
         src.border = box
     r += 1
-hv.column_dimensions["A"].width = 48
+hv.column_dimensions["A"].width = 50
 for c in VC:
     hv.column_dimensions[c].width = 20
 for c in SC:
-    hv.column_dimensions[c].width = 34
+    hv.column_dimensions[c].width = 42
 hv.freeze_panes = "B5"
 
 def H(key, j):
-    return f"Ham_Veri!${VC[j]}${ROW[key]}"
+    return f"Raw_Data!${VC[j]}${ROW[key]}"
 
-# ---------------- Parametreler ----------------
-pr = wb.create_sheet("Parametreler")
-pr["A1"] = "Parametreler"; pr["A1"].font = title
-pr["A3"] = "Gün sayısı"; pr["A3"].font = bold
+# ---------------- Parameters ----------------
+pr = wb.create_sheet("Parameters")
+pr["A1"] = "Parameters"; pr["A1"].font = title
+pr["A3"] = "Days in a year"; pr["A3"].font = bold
 pr["B3"] = 365; pr["B3"].font = blue; pr["B3"].fill = yellow
-pr["C3"] = "Ders notları 360 kullanıyorsa bu hücreyi değiştirin; tüm gün hesapları buna bağlı."; pr["C3"].font = ital
-for i, h in enumerate(["", *COLS]):
-    c = pr.cell(row=5, column=i + 1, value=h or "Parametre")
+pr["C3"] = "If the course notes use 360 days, change this cell. All day-based ratios are linked to it."
+pr["C3"].font = ital
+for i, h in enumerate(["Parameter", *COLS]):
+    c = pr.cell(row=5, column=i + 1, value=h)
     c.font, c.fill, c.border = hdrfont, hdrfill, box
-pr["A6"] = "Gelir tablosu dönem uzunluğu (ay)"
-pr["A7"] = "Yıllıklandırma çarpanı = 12 / dönem uzunluğu"
+pr["A6"] = "Income statement period length (months)"
+pr["A7"] = "Annualization factor = 12 / period length"
 PC = ["B", "C", "D", "E"]
 for j in range(4):
     pr[f"{PC[j]}6"] = f"={H('ay', j)}"; pr[f"{PC[j]}6"].font = green
@@ -158,45 +160,26 @@ for j in range(4):
 pr.column_dimensions["A"].width = 46
 for c in PC:
     pr.column_dimensions[c].width = 16
-GUN = "Parametreler!$B$3"
-def CARP(j):
-    return f"Parametreler!${PC[j]}$7"
+DAYS = "Parameters!$B$3"
+def FACTOR(j):
+    return f"Parameters!${PC[j]}$7"
 
-# ---------------- ortak blok yazıcı ----------------
-OC = ["D", "E", "F", "G"]   # oran sayfalarında değer sütunları
-RESULT = {}  # oran adı -> (sayfa, satır, format)
-
-TC = ["I", "J", "K", "L"]   # oran sayfalarında "Hesaplama" metin sütunları
+# ---------------- shared block writer ----------------
+OC = ["D", "E", "F", "G"]   # value columns on ratio sheets
+TC = ["I", "J", "K", "L"]   # "Calculation" text columns on ratio sheets
+RESULT = {}                 # ratio name -> (sheet, row, format)
 DEC = {TL: 0, RAT: 2, DAY: 1, "0": 0, "0.00": 2}
-EN = {
-    "Cari oran": "Current Ratio",
-    "Asit-test oranı": "Acid-Test (Quick) Ratio",
-    "Nakit oranı": "Cash Ratio",
-    "Net işletme sermayesi (bin TL)": "Net Working Capital",
-    "Yıllıklandırma (ara adım)": "Annualization",
-    "Stok devir hızı": "Inventory Turnover",
-    "Stokta kalma süresi (gün)": "Days Sales in Inventory",
-    "Alacak devir hızı": "Receivables Turnover",
-    "Ortalama tahsil süresi (gün)": "Average Collection Period",
-    "Borç devir hızı": "Payables Turnover",
-    "Ortalama ödeme süresi (gün)": "Average Payment Period",
-    "Nakit dönüşüm süresi (gün)": "Cash Conversion Cycle",
-    "Maddi duran varlık devir hızı": "Fixed Asset Turnover",
-    "Aktif devir hızı": "Total Asset Turnover",
-}
 
 def calc_text(formula, row_fmt, res_ref, res_fmt):
-    """'=D6/D7' → =FIXED(D6,0)&" / "&FIXED(D7,0)&" = "&FIXED(D8,2)  (FIXED yerel ayraçları kullanır)"""
-    import re as _re
-    body = formula.lstrip("=")
-    parts = _re.split(r"([+\-*/])", body)
+    """'=D6/D7' -> =FIXED(D6,0)&" / "&FIXED(D7,0)&" = "&FIXED(D8,2)  (FIXED uses the local separators)"""
+    parts = re.split(r"([+\-*/])", formula.lstrip("="))
     out = []
     for t in parts:
         t = t.strip()
-        if t in "+-*/" and t:
+        if t and t in "+-*/":
             out.append('" ' + {"-": "−", "*": "×"}.get(t, t) + ' "')
         elif t:
-            m = _re.match(r"\$?([A-Z]+)\$?(\d+)$", t)
+            m = re.match(r"\$?([A-Z]+)\$?(\d+)$", t)
             d = DEC.get(row_fmt.get(int(m.group(2)), TL), 0) if m else 0
             out.append(f"FIXED({t},{d})")
     out.append('" = "')
@@ -206,31 +189,31 @@ def calc_text(formula, row_fmt, res_ref, res_fmt):
 def setup_ratio_sheet(ws, ttl, note):
     ws["A1"] = ttl; ws["A1"].font = title
     ws["A2"] = note; ws["A2"].font = ital
-    for i, h in enumerate(["Oran", "Formül", "Adım", *COLS, "", *[f"Hesaplama – {c}" for c in COLS]]):
+    heads = ["Ratio", "Formula", "Step", *COLS, "", *[f"Calculation – {c}" for c in COLS]]
+    for i, h in enumerate(heads):
         if not h:
             continue
         c = ws.cell(row=4, column=i + 1, value=h)
         c.font, c.fill, c.border = hdrfont, hdrfill, box
         c.alignment = Alignment(horizontal="center", wrap_text=True)
     ws.row_dimensions[4].height = 30
+    ws.column_dimensions["A"].width = 32
+    ws.column_dimensions["B"].width = 50
+    ws.column_dimensions["C"].width = 42
+    for c in OC:
+        ws.column_dimensions[c].width = 18
     ws.column_dimensions["H"].width = 2
     for c in TC:
         ws.column_dimensions[c].width = 40
-    ws.column_dimensions["A"].width = 34
-    ws.column_dimensions["B"].width = 46
-    ws.column_dimensions["C"].width = 44
-    for c in OC:
-        ws.column_dimensions[c].width = 18
     ws.freeze_panes = "D5"
 
 def block(ws, start, name, formula, steps, sheetname):
-    """steps: list of (etiket, fn(j, rowmap)->formül, format, tür) tür: 'link'|'calc'|'result'"""
-    ws.cell(row=start, column=1, value=f"{name} ({EN[name]})" if name in EN else name).font = bold
-    row_fmt = {}
+    """steps: list of (label, fn(j, rowmap) -> formula, format, kind); kind = 'link' | 'calc' | 'result'"""
+    ws.cell(row=start, column=1, value=name).font = bold
     ws.cell(row=start, column=2, value=formula).font = norm
-    for col in [1,2,3,4,5,6,7,9,10,11,12]:
+    for col in [1, 2, 3, 4, 5, 6, 7, 9, 10, 11, 12]:
         ws.cell(row=start, column=col).fill = secfill
-    rowmap = {}
+    rowmap, row_fmt = {}, {}
     r = start + 1
     for label, fn, fmt, kind in steps:
         ws.cell(row=r, column=3, value=label).font = bold if kind == "result" else norm
@@ -255,122 +238,123 @@ def block(ws, start, name, formula, steps, sheetname):
 def ref(rowmap, label, j):
     return f"{OC[j]}{rowmap[label]}"
 
-# ---------------- Likidite ----------------
-lk = wb.create_sheet("Likidite")
-setup_ratio_sheet(lk, "Likidite Oranları",
-                  "Tüm değerler Ham_Veri sayfasına bağlı canlı formüllerdir. Dönem sonu bakiyeleri kullanılmıştır.")
+# ---------------- Liquidity ----------------
+lk = wb.create_sheet("Liquidity")
+setup_ratio_sheet(lk, "Liquidity Ratios",
+                  "All values are live formulas linked to the Raw_Data sheet. Period-end balances are used.")
 r = 5
-r, _ = block(lk, r, "Cari oran", "Dönen varlıklar / Kısa vadeli yabancı kaynaklar (KVYK)", [
-    ("Pay: Toplam dönen varlıklar", lambda j, m: f"={H('donen', j)}", TL, "link"),
-    ("Payda: KVYK", lambda j, m: f"={H('kvyk', j)}", TL, "link"),
-    ("Sonuç: Cari oran", lambda j, m: f"={ref(m,'Pay: Toplam dönen varlıklar',j)}/{ref(m,'Payda: KVYK',j)}", RAT, "result"),
-], "Likidite")
-r, _ = block(lk, r, "Asit-test oranı", "(Dönen varlıklar − Stoklar) / KVYK", [
-    ("Toplam dönen varlıklar", lambda j, m: f"={H('donen', j)}", TL, "link"),
-    ("Stoklar", lambda j, m: f"={H('stok', j)}", TL, "link"),
-    ("Pay: Dönen varlıklar − Stoklar", lambda j, m: f"={ref(m,'Toplam dönen varlıklar',j)}-{ref(m,'Stoklar',j)}", TL, "calc"),
-    ("Payda: KVYK", lambda j, m: f"={H('kvyk', j)}", TL, "link"),
-    ("Sonuç: Asit-test oranı", lambda j, m: f"={ref(m,'Pay: Dönen varlıklar − Stoklar',j)}/{ref(m,'Payda: KVYK',j)}", RAT, "result"),
-], "Likidite")
-r, _ = block(lk, r, "Nakit oranı", "(Nakit ve nakit benzerleri + KV finansal yatırımlar) / KVYK", [
-    ("Nakit ve nakit benzerleri", lambda j, m: f"={H('nakit', j)}", TL, "link"),
-    ("Kısa vadeli finansal yatırımlar", lambda j, m: f"={H('kvfy', j)}", TL, "link"),
-    ("Pay: Nakit + KV finansal yatırımlar", lambda j, m: f"={ref(m,'Nakit ve nakit benzerleri',j)}+{ref(m,'Kısa vadeli finansal yatırımlar',j)}", TL, "calc"),
-    ("Payda: KVYK", lambda j, m: f"={H('kvyk', j)}", TL, "link"),
-    ("Sonuç: Nakit oranı", lambda j, m: f"={ref(m,'Pay: Nakit + KV finansal yatırımlar',j)}/{ref(m,'Payda: KVYK',j)}", RAT, "result"),
-], "Likidite")
-r, _ = block(lk, r, "Net işletme sermayesi (bin TL)", "Dönen varlıklar − KVYK", [
-    ("Toplam dönen varlıklar", lambda j, m: f"={H('donen', j)}", TL, "link"),
-    ("KVYK", lambda j, m: f"={H('kvyk', j)}", TL, "link"),
-    ("Sonuç: Net işletme sermayesi (bin TL)", lambda j, m: f"={ref(m,'Toplam dönen varlıklar',j)}-{ref(m,'KVYK',j)}", TL, "result"),
-], "Likidite")
+r, _ = block(lk, r, "Current Ratio", "Current assets / Current liabilities", [
+    ("Numerator: Total current assets", lambda j, m: f"={H('donen', j)}", TL, "link"),
+    ("Denominator: Total current liabilities", lambda j, m: f"={H('kvyk', j)}", TL, "link"),
+    ("Result: Current ratio (times)", lambda j, m: f"={ref(m,'Numerator: Total current assets',j)}/{ref(m,'Denominator: Total current liabilities',j)}", RAT, "result"),
+], "Liquidity")
+r, _ = block(lk, r, "Acid-Test (Quick) Ratio", "(Current assets − Inventories) / Current liabilities", [
+    ("Total current assets", lambda j, m: f"={H('donen', j)}", TL, "link"),
+    ("Inventories", lambda j, m: f"={H('stok', j)}", TL, "link"),
+    ("Numerator: Current assets − Inventories", lambda j, m: f"={ref(m,'Total current assets',j)}-{ref(m,'Inventories',j)}", TL, "calc"),
+    ("Denominator: Total current liabilities", lambda j, m: f"={H('kvyk', j)}", TL, "link"),
+    ("Result: Acid-test ratio (times)", lambda j, m: f"={ref(m,'Numerator: Current assets − Inventories',j)}/{ref(m,'Denominator: Total current liabilities',j)}", RAT, "result"),
+], "Liquidity")
+r, _ = block(lk, r, "Cash Ratio", "(Cash and cash equivalents + Short-term financial investments) / Current liabilities", [
+    ("Cash and cash equivalents", lambda j, m: f"={H('nakit', j)}", TL, "link"),
+    ("Short-term financial investments", lambda j, m: f"={H('kvfy', j)}", TL, "link"),
+    ("Numerator: Cash + Short-term financial investments", lambda j, m: f"={ref(m,'Cash and cash equivalents',j)}+{ref(m,'Short-term financial investments',j)}", TL, "calc"),
+    ("Denominator: Total current liabilities", lambda j, m: f"={H('kvyk', j)}", TL, "link"),
+    ("Result: Cash ratio (times)", lambda j, m: f"={ref(m,'Numerator: Cash + Short-term financial investments',j)}/{ref(m,'Denominator: Total current liabilities',j)}", RAT, "result"),
+], "Liquidity")
+r, _ = block(lk, r, "Net Working Capital (TRY thousand)", "Current assets − Current liabilities", [
+    ("Total current assets", lambda j, m: f"={H('donen', j)}", TL, "link"),
+    ("Total current liabilities", lambda j, m: f"={H('kvyk', j)}", TL, "link"),
+    ("Result: Net working capital (TRY thousand)", lambda j, m: f"={ref(m,'Total current assets',j)}-{ref(m,'Total current liabilities',j)}", TL, "result"),
+], "Liquidity")
 
-# ---------------- Faaliyet ----------------
-fa = wb.create_sheet("Faaliyet")
-setup_ratio_sheet(fa, "Faaliyet Oranları",
-                  "Gelir tablosu tutarları yıllıklandırma çarpanıyla (Parametreler) çarpılır: 2025Q4 ×1, 2026Q2 ×2. "
-                  "Satışların maliyeti mutlak değerle kullanılır. Bilanço kalemleri dönem sonu bakiyesidir.")
+# ---------------- Activity ----------------
+fa = wb.create_sheet("Activity")
+setup_ratio_sheet(fa, "Activity Ratios",
+                  "Income statement figures are multiplied by the annualization factor (see Parameters): 2025Q4 ×1, "
+                  "2026Q2 ×2. Cost of sales is used as an absolute value. Balance sheet items are period-end balances.")
 r = 5
-# Ortak yıllıklandırma bloğu
-r, Y = block(fa, r, "Yıllıklandırma (ara adım)", "Gelir tablosu tutarı × (12 / dönem uzunluğu)", [
-    ("Hasılat (dönem, KAP)", lambda j, m: f"={H('hasilat', j)}", TL, "link"),
-    ("Satışların maliyeti (dönem, mutlak değer)", lambda j, m: f"=ABS({H('smm', j)})", TL, "link"),
-    ("Yıllıklandırma çarpanı", lambda j, m: f"={CARP(j)}", "0.00", "link"),
-    ("Gün sayısı", lambda j, m: f"={GUN}", "0", "link"),
-    ("Yıllıklandırılmış hasılat", lambda j, m: f"={ref(m,'Hasılat (dönem, KAP)',j)}*{ref(m,'Yıllıklandırma çarpanı',j)}", TL, "calc"),
-    ("Yıllıklandırılmış satışların maliyeti", lambda j, m: f"={ref(m,'Satışların maliyeti (dönem, mutlak değer)',j)}*{ref(m,'Yıllıklandırma çarpanı',j)}", TL, "calc"),
-], "Faaliyet")
-def YH(j): return f"{OC[j]}${Y['Yıllıklandırılmış hasılat']}"
-def YS(j): return f"{OC[j]}${Y['Yıllıklandırılmış satışların maliyeti']}"
-def GN(j): return f"{OC[j]}${Y['Gün sayısı']}"
+r, Y = block(fa, r, "Annualization (intermediate step)", "Income statement amount × (12 / period length)", [
+    ("Revenue (for the period, as reported)", lambda j, m: f"={H('hasilat', j)}", TL, "link"),
+    ("Cost of sales (for the period, absolute value)", lambda j, m: f"=ABS({H('smm', j)})", TL, "link"),
+    ("Annualization factor", lambda j, m: f"={FACTOR(j)}", "0.00", "link"),
+    ("Days in a year", lambda j, m: f"={DAYS}", "0", "link"),
+    ("Annualized revenue", lambda j, m: f"={ref(m,'Revenue (for the period, as reported)',j)}*{ref(m,'Annualization factor',j)}", TL, "calc"),
+    ("Annualized cost of sales", lambda j, m: f"={ref(m,'Cost of sales (for the period, absolute value)',j)}*{ref(m,'Annualization factor',j)}", TL, "calc"),
+], "Activity")
+def AREV(j): return f"{OC[j]}${Y['Annualized revenue']}"
+def ACOS(j): return f"{OC[j]}${Y['Annualized cost of sales']}"
+def ND(j): return f"{OC[j]}${Y['Days in a year']}"
 
-r, _ = block(fa, r, "Stok devir hızı", "Yıllıklandırılmış satışların maliyeti / Stoklar", [
-    ("Pay: Yıllıklandırılmış SMM", lambda j, m: f"={YS(j)}", TL, "calc"),
-    ("Payda: Stoklar", lambda j, m: f"={H('stok', j)}", TL, "link"),
-    ("Sonuç: Stok devir hızı (kez)", lambda j, m: f"={ref(m,'Pay: Yıllıklandırılmış SMM',j)}/{ref(m,'Payda: Stoklar',j)}", RAT, "result"),
-], "Faaliyet")
-stok_dh = RESULT["Stok devir hızı"][1]
-r, _ = block(fa, r, "Stokta kalma süresi (gün)", "Gün sayısı / Stok devir hızı", [
-    ("Gün sayısı", lambda j, m: f"={GN(j)}", "0", "calc"),
-    ("Stok devir hızı", lambda j, m: f"={OC[j]}{stok_dh}", RAT, "calc"),
-    ("Sonuç: Stokta kalma süresi (gün)", lambda j, m: f"={ref(m,'Gün sayısı',j)}/{ref(m,'Stok devir hızı',j)}", DAY, "result"),
-], "Faaliyet")
-r, _ = block(fa, r, "Alacak devir hızı", "Yıllıklandırılmış hasılat / Ticari alacaklar", [
-    ("Pay: Yıllıklandırılmış hasılat", lambda j, m: f"={YH(j)}", TL, "calc"),
-    ("Payda: Ticari alacaklar (KV)", lambda j, m: f"={H('ticalacak', j)}", TL, "link"),
-    ("Sonuç: Alacak devir hızı (kez)", lambda j, m: f"={ref(m,'Pay: Yıllıklandırılmış hasılat',j)}/{ref(m,'Payda: Ticari alacaklar (KV)',j)}", RAT, "result"),
-], "Faaliyet")
-al_dh = RESULT["Alacak devir hızı"][1]
-r, _ = block(fa, r, "Ortalama tahsil süresi (gün)", "Gün sayısı / Alacak devir hızı", [
-    ("Gün sayısı", lambda j, m: f"={GN(j)}", "0", "calc"),
-    ("Alacak devir hızı", lambda j, m: f"={OC[j]}{al_dh}", RAT, "calc"),
-    ("Sonuç: Ortalama tahsil süresi (gün)", lambda j, m: f"={ref(m,'Gün sayısı',j)}/{ref(m,'Alacak devir hızı',j)}", DAY, "result"),
-], "Faaliyet")
-r, _ = block(fa, r, "Borç devir hızı", "Yıllıklandırılmış satışların maliyeti / Ticari borçlar", [
-    ("Pay: Yıllıklandırılmış SMM", lambda j, m: f"={YS(j)}", TL, "calc"),
-    ("Payda: Ticari borçlar (KV)", lambda j, m: f"={H('ticborc', j)}", TL, "link"),
-    ("Sonuç: Borç devir hızı (kez)", lambda j, m: f"={ref(m,'Pay: Yıllıklandırılmış SMM',j)}/{ref(m,'Payda: Ticari borçlar (KV)',j)}", RAT, "result"),
-], "Faaliyet")
-bo_dh = RESULT["Borç devir hızı"][1]
-r, _ = block(fa, r, "Ortalama ödeme süresi (gün)", "Gün sayısı / Borç devir hızı", [
-    ("Gün sayısı", lambda j, m: f"={GN(j)}", "0", "calc"),
-    ("Borç devir hızı", lambda j, m: f"={OC[j]}{bo_dh}", RAT, "calc"),
-    ("Sonuç: Ortalama ödeme süresi (gün)", lambda j, m: f"={ref(m,'Gün sayısı',j)}/{ref(m,'Borç devir hızı',j)}", DAY, "result"),
-], "Faaliyet")
-sk = RESULT["Stokta kalma süresi (gün)"][1]; ts = RESULT["Ortalama tahsil süresi (gün)"][1]; od = RESULT["Ortalama ödeme süresi (gün)"][1]
-r, _ = block(fa, r, "Nakit dönüşüm süresi (gün)", "Stokta kalma süresi + Ortalama tahsil süresi − Ortalama ödeme süresi", [
-    ("Stokta kalma süresi", lambda j, m: f"={OC[j]}{sk}", DAY, "calc"),
-    ("Ortalama tahsil süresi", lambda j, m: f"={OC[j]}{ts}", DAY, "calc"),
-    ("Ortalama ödeme süresi", lambda j, m: f"={OC[j]}{od}", DAY, "calc"),
-    ("Sonuç: Nakit dönüşüm süresi (gün)", lambda j, m: f"={ref(m,'Stokta kalma süresi',j)}+{ref(m,'Ortalama tahsil süresi',j)}-{ref(m,'Ortalama ödeme süresi',j)}", DAY, "result"),
-], "Faaliyet")
-r, _ = block(fa, r, "Maddi duran varlık devir hızı", "Yıllıklandırılmış hasılat / Maddi duran varlıklar", [
-    ("Pay: Yıllıklandırılmış hasılat", lambda j, m: f"={YH(j)}", TL, "calc"),
-    ("Payda: Maddi duran varlıklar", lambda j, m: f"={H('mdv', j)}", TL, "link"),
-    ("Sonuç: MDV devir hızı (kez)", lambda j, m: f"={ref(m,'Pay: Yıllıklandırılmış hasılat',j)}/{ref(m,'Payda: Maddi duran varlıklar',j)}", RAT, "result"),
-], "Faaliyet")
-r, _ = block(fa, r, "Aktif devir hızı", "Yıllıklandırılmış hasılat / Toplam varlıklar", [
-    ("Pay: Yıllıklandırılmış hasılat", lambda j, m: f"={YH(j)}", TL, "calc"),
-    ("Payda: Toplam varlıklar", lambda j, m: f"={H('toplamvar', j)}", TL, "link"),
-    ("Sonuç: Aktif devir hızı (kez)", lambda j, m: f"={ref(m,'Pay: Yıllıklandırılmış hasılat',j)}/{ref(m,'Payda: Toplam varlıklar',j)}", RAT, "result"),
-], "Faaliyet")
+r, _ = block(fa, r, "Inventory Turnover", "Annualized cost of sales / Inventories", [
+    ("Numerator: Annualized cost of sales", lambda j, m: f"={ACOS(j)}", TL, "calc"),
+    ("Denominator: Inventories", lambda j, m: f"={H('stok', j)}", TL, "link"),
+    ("Result: Inventory turnover (times)", lambda j, m: f"={ref(m,'Numerator: Annualized cost of sales',j)}/{ref(m,'Denominator: Inventories',j)}", RAT, "result"),
+], "Activity")
+inv_t = RESULT["Inventory Turnover"][1]
+r, _ = block(fa, r, "Days Sales in Inventory (days)", "Days in a year / Inventory turnover", [
+    ("Days in a year", lambda j, m: f"={ND(j)}", "0", "calc"),
+    ("Inventory turnover", lambda j, m: f"={OC[j]}{inv_t}", RAT, "calc"),
+    ("Result: Days sales in inventory (days)", lambda j, m: f"={ref(m,'Days in a year',j)}/{ref(m,'Inventory turnover',j)}", DAY, "result"),
+], "Activity")
+r, _ = block(fa, r, "Receivables Turnover", "Annualized revenue / Trade receivables", [
+    ("Numerator: Annualized revenue", lambda j, m: f"={AREV(j)}", TL, "calc"),
+    ("Denominator: Trade receivables (current)", lambda j, m: f"={H('ticalacak', j)}", TL, "link"),
+    ("Result: Receivables turnover (times)", lambda j, m: f"={ref(m,'Numerator: Annualized revenue',j)}/{ref(m,'Denominator: Trade receivables (current)',j)}", RAT, "result"),
+], "Activity")
+rec_t = RESULT["Receivables Turnover"][1]
+r, _ = block(fa, r, "Average Collection Period (days)", "Days in a year / Receivables turnover", [
+    ("Days in a year", lambda j, m: f"={ND(j)}", "0", "calc"),
+    ("Receivables turnover", lambda j, m: f"={OC[j]}{rec_t}", RAT, "calc"),
+    ("Result: Average collection period (days)", lambda j, m: f"={ref(m,'Days in a year',j)}/{ref(m,'Receivables turnover',j)}", DAY, "result"),
+], "Activity")
+r, _ = block(fa, r, "Payables Turnover", "Annualized cost of sales / Trade payables", [
+    ("Numerator: Annualized cost of sales", lambda j, m: f"={ACOS(j)}", TL, "calc"),
+    ("Denominator: Trade payables (current)", lambda j, m: f"={H('ticborc', j)}", TL, "link"),
+    ("Result: Payables turnover (times)", lambda j, m: f"={ref(m,'Numerator: Annualized cost of sales',j)}/{ref(m,'Denominator: Trade payables (current)',j)}", RAT, "result"),
+], "Activity")
+pay_t = RESULT["Payables Turnover"][1]
+r, _ = block(fa, r, "Average Payment Period (days)", "Days in a year / Payables turnover", [
+    ("Days in a year", lambda j, m: f"={ND(j)}", "0", "calc"),
+    ("Payables turnover", lambda j, m: f"={OC[j]}{pay_t}", RAT, "calc"),
+    ("Result: Average payment period (days)", lambda j, m: f"={ref(m,'Days in a year',j)}/{ref(m,'Payables turnover',j)}", DAY, "result"),
+], "Activity")
+dsi = RESULT["Days Sales in Inventory (days)"][1]
+acp = RESULT["Average Collection Period (days)"][1]
+app = RESULT["Average Payment Period (days)"][1]
+r, _ = block(fa, r, "Cash Conversion Cycle (days)", "Days sales in inventory + Average collection period − Average payment period", [
+    ("Days sales in inventory", lambda j, m: f"={OC[j]}{dsi}", DAY, "calc"),
+    ("Average collection period", lambda j, m: f"={OC[j]}{acp}", DAY, "calc"),
+    ("Average payment period", lambda j, m: f"={OC[j]}{app}", DAY, "calc"),
+    ("Result: Cash conversion cycle (days)", lambda j, m: f"={ref(m,'Days sales in inventory',j)}+{ref(m,'Average collection period',j)}-{ref(m,'Average payment period',j)}", DAY, "result"),
+], "Activity")
+r, _ = block(fa, r, "Fixed Asset Turnover", "Annualized revenue / Property, plant and equipment", [
+    ("Numerator: Annualized revenue", lambda j, m: f"={AREV(j)}", TL, "calc"),
+    ("Denominator: Property, plant and equipment", lambda j, m: f"={H('mdv', j)}", TL, "link"),
+    ("Result: Fixed asset turnover (times)", lambda j, m: f"={ref(m,'Numerator: Annualized revenue',j)}/{ref(m,'Denominator: Property, plant and equipment',j)}", RAT, "result"),
+], "Activity")
+r, _ = block(fa, r, "Total Asset Turnover", "Annualized revenue / Total assets", [
+    ("Numerator: Annualized revenue", lambda j, m: f"={AREV(j)}", TL, "calc"),
+    ("Denominator: Total assets", lambda j, m: f"={H('toplamvar', j)}", TL, "link"),
+    ("Result: Total asset turnover (times)", lambda j, m: f"={ref(m,'Numerator: Annualized revenue',j)}/{ref(m,'Denominator: Total assets',j)}", RAT, "result"),
+], "Activity")
 
-# ---------------- Karsilastirma ----------------
-ks = wb.create_sheet("Karsilastirma")
-ks["A1"] = "Karşılaştırma — 6 aylık değişim ve MGROS − BIMAS farkı"; ks["A1"].font = title
-ks["A2"] = "Değişim = 2026Q2 − 2025Q4; % değişim = değişim / |2025Q4|. Fark = MGROS − BIMAS."; ks["A2"].font = ital
-heads = ["Oran", "MGROS 2025Q4", "MGROS 2026Q2", "MGROS değişim", "MGROS % değişim",
-         "BIMAS 2025Q4", "BIMAS 2026Q2", "BIMAS değişim", "BIMAS % değişim",
-         "Fark 2025Q4 (MGROS−BIMAS)", "Fark 2026Q2 (MGROS−BIMAS)"]
+# ---------------- Comparison ----------------
+ks = wb.create_sheet("Comparison")
+ks["A1"] = "Comparison – 6-month change and MGROS vs. BIMAS difference"; ks["A1"].font = title
+ks["A2"] = ("Change = 2026Q2 − 2025Q4; % change = change / |2025Q4|. "
+            "Difference = MGROS − BIMAS.")
+ks["A2"].font = ital
+heads = ["Ratio", "MGROS 2025Q4", "MGROS 2026Q2", "MGROS change", "MGROS % change",
+         "BIMAS 2025Q4", "BIMAS 2026Q2", "BIMAS change", "BIMAS % change",
+         "Difference 2025Q4 (MGROS − BIMAS)", "Difference 2026Q2 (MGROS − BIMAS)"]
 for i, h in enumerate(heads):
     c = ks.cell(row=4, column=i + 1, value=h)
     c.font, c.fill, c.border = hdrfont, hdrfill, box
     c.alignment = Alignment(horizontal="center", wrap_text=True)
 rr = 5
 for name, (sh, row, fmt) in RESULT.items():
-    if name == "Yıllıklandırma (ara adım)":
-        continue
-    ks.cell(row=rr, column=1, value=f"{name} ({EN[name]})").font = norm
+    ks.cell(row=rr, column=1, value=name).font = norm
     m0, m1, b0, b1 = [f"{sh}!{OC[j]}{row}" for j in range(4)]
     vals = {"B": f"={m0}", "C": f"={m1}", "D": f"=C{rr}-B{rr}", "E": f"=IF(B{rr}=0,\"n/a\",D{rr}/ABS(B{rr}))",
             "F": f"={b0}", "G": f"={b1}", "H": f"=G{rr}-F{rr}", "I": f"=IF(F{rr}=0,\"n/a\",H{rr}/ABS(F{rr}))",
@@ -382,22 +366,22 @@ for name, (sh, row, fmt) in RESULT.items():
         c.font = green if col in ("B", "C", "F", "G") else norm
         c.border = box
     rr += 1
-ks.column_dimensions["A"].width = 46
+ks.column_dimensions["A"].width = 38
 for i in range(2, 12):
-    ks.column_dimensions[L(i)].width = 16
-ks.row_dimensions[4].height = 32
+    ks.column_dimensions[L(i)].width = 17
+ks.row_dimensions[4].height = 45
 
-# ---------------- Kontroller ----------------
-kt = wb.create_sheet("Kontroller")
-kt["A1"] = "Veri kontrolleri (tümü 0 / TAMAM olmalı)"; kt["A1"].font = title
-for i, h in enumerate(["Kontrol", *COLS]):
+# ---------------- Checks ----------------
+kt = wb.create_sheet("Checks")
+kt["A1"] = "Data checks (all differences should be 0 and the status should be OK)"; kt["A1"].font = title
+for i, h in enumerate(["Check", *COLS]):
     c = kt.cell(row=3, column=i + 1, value=h)
     c.font, c.fill, c.border = hdrfont, hdrfill, box
 checks = [
-    ("Toplam varlıklar − (Toplam yükümlülükler + Toplam özkaynaklar)", lambda j: f"={H('toplamvar',j)}-({H('toplamyuk',j)}+{H('ozkaynak',j)})"),
-    ("(Dönen + Duran varlıklar) − Toplam varlıklar", lambda j: f"=({H('donen',j)}+{H('duran',j)})-{H('toplamvar',j)}"),
-    ("(KVYK + UVYK) − Toplam yükümlülükler", lambda j: f"=({H('kvyk',j)}+{H('uvyk',j)})-{H('toplamyuk',j)}"),
-    ("Brüt kâr − (Hasılat − |Satışların maliyeti|)", lambda j: f"={H('brut',j)}-({H('hasilat',j)}-ABS({H('smm',j)}))"),
+    ("Total assets − (Total liabilities + Total equity)", lambda j: f"={H('toplamvar',j)}-({H('toplamyuk',j)}+{H('ozkaynak',j)})"),
+    ("(Current assets + Non-current assets) − Total assets", lambda j: f"=({H('donen',j)}+{H('duran',j)})-{H('toplamvar',j)}"),
+    ("(Current liabilities + Non-current liabilities) − Total liabilities", lambda j: f"=({H('kvyk',j)}+{H('uvyk',j)})-{H('toplamyuk',j)}"),
+    ("Gross profit − (Revenue − |Cost of sales|)", lambda j: f"={H('brut',j)}-({H('hasilat',j)}-ABS({H('smm',j)}))"),
 ]
 for i, (lab, fn) in enumerate(checks):
     rr = 4 + i
@@ -405,14 +389,15 @@ for i, (lab, fn) in enumerate(checks):
     for j in range(4):
         c = kt[f"{PC[j]}{rr}"]; c.value = fn(j); c.number_format = TL; c.border = box
 st = 4 + len(checks)
-kt.cell(row=st, column=1, value="Durum").font = bold
+kt.cell(row=st, column=1, value="Status").font = bold
 for j in range(4):
     c = kt[f"{PC[j]}{st}"]
-    c.value = f'=IF(SUMPRODUCT(ABS({PC[j]}4:{PC[j]}{st-1}))<1,"TAMAM","KONTROL ET")'
+    c.value = f'=IF(SUMPRODUCT(ABS({PC[j]}4:{PC[j]}{st-1}))<1,"OK","CHECK")'
     c.font = bold; c.border = box
-kt["A" + str(st + 2)] = "Not: <1 TL tolerans (yuvarlama). Bir fark çıkarsa Ham_Veri girişini rapordan yeniden kontrol edin."
+kt["A" + str(st + 2)] = ("Note: a tolerance of TRY 1 thousand is allowed for rounding. If a difference appears, "
+                         "re-check the Raw_Data entry against the report.")
 kt["A" + str(st + 2)].font = ital
-kt.column_dimensions["A"].width = 58
+kt.column_dimensions["A"].width = 62
 for c in PC:
     kt.column_dimensions[c].width = 18
 
@@ -423,4 +408,4 @@ for ws in wb.worksheets:
                 c.font = Font(name=F, bold=c.font.bold, italic=c.font.italic, color=c.font.color, size=c.font.size)
 
 wb.save(OUT)
-print("Kaydedildi:", OUT)
+print("Saved:", OUT)
