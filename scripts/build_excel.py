@@ -166,14 +166,57 @@ def CARP(j):
 OC = ["D", "E", "F", "G"]   # oran sayfalarında değer sütunları
 RESULT = {}  # oran adı -> (sayfa, satır, format)
 
+TC = ["I", "J", "K", "L"]   # oran sayfalarında "Hesaplama" metin sütunları
+DEC = {TL: 0, RAT: 2, DAY: 1, "0": 0, "0.00": 2}
+EN = {
+    "Cari oran": "Current Ratio",
+    "Asit-test oranı": "Acid-Test (Quick) Ratio",
+    "Nakit oranı": "Cash Ratio",
+    "Net işletme sermayesi (bin TL)": "Net Working Capital",
+    "Yıllıklandırma (ara adım)": "Annualization",
+    "Stok devir hızı": "Inventory Turnover",
+    "Stokta kalma süresi (gün)": "Days Sales in Inventory",
+    "Alacak devir hızı": "Receivables Turnover",
+    "Ortalama tahsil süresi (gün)": "Average Collection Period",
+    "Borç devir hızı": "Payables Turnover",
+    "Ortalama ödeme süresi (gün)": "Average Payment Period",
+    "Nakit dönüşüm süresi (gün)": "Cash Conversion Cycle",
+    "Maddi duran varlık devir hızı": "Fixed Asset Turnover",
+    "Aktif devir hızı": "Total Asset Turnover",
+}
+
+def calc_text(formula, row_fmt, res_ref, res_fmt):
+    """'=D6/D7' → =FIXED(D6,0)&" / "&FIXED(D7,0)&" = "&FIXED(D8,2)  (FIXED yerel ayraçları kullanır)"""
+    import re as _re
+    body = formula.lstrip("=")
+    parts = _re.split(r"([+\-*/])", body)
+    out = []
+    for t in parts:
+        t = t.strip()
+        if t in "+-*/" and t:
+            out.append('" ' + {"-": "−", "*": "×"}.get(t, t) + ' "')
+        elif t:
+            m = _re.match(r"\$?([A-Z]+)\$?(\d+)$", t)
+            d = DEC.get(row_fmt.get(int(m.group(2)), TL), 0) if m else 0
+            out.append(f"FIXED({t},{d})")
+    out.append('" = "')
+    out.append(f"FIXED({res_ref},{DEC.get(res_fmt, 2)})")
+    return "=" + "&".join(out)
+
 def setup_ratio_sheet(ws, ttl, note):
     ws["A1"] = ttl; ws["A1"].font = title
     ws["A2"] = note; ws["A2"].font = ital
-    for i, h in enumerate(["Oran", "Formül", "Adım", *COLS]):
+    for i, h in enumerate(["Oran", "Formül", "Adım", *COLS, "", *[f"Hesaplama – {c}" for c in COLS]]):
+        if not h:
+            continue
         c = ws.cell(row=4, column=i + 1, value=h)
         c.font, c.fill, c.border = hdrfont, hdrfill, box
-        c.alignment = Alignment(horizontal="center")
-    ws.column_dimensions["A"].width = 30
+        c.alignment = Alignment(horizontal="center", wrap_text=True)
+    ws.row_dimensions[4].height = 30
+    ws.column_dimensions["H"].width = 2
+    for c in TC:
+        ws.column_dimensions[c].width = 40
+    ws.column_dimensions["A"].width = 34
     ws.column_dimensions["B"].width = 46
     ws.column_dimensions["C"].width = 44
     for c in OC:
@@ -182,9 +225,10 @@ def setup_ratio_sheet(ws, ttl, note):
 
 def block(ws, start, name, formula, steps, sheetname):
     """steps: list of (etiket, fn(j, rowmap)->formül, format, tür) tür: 'link'|'calc'|'result'"""
-    ws.cell(row=start, column=1, value=name).font = bold
+    ws.cell(row=start, column=1, value=f"{name} ({EN[name]})" if name in EN else name).font = bold
+    row_fmt = {}
     ws.cell(row=start, column=2, value=formula).font = norm
-    for col in range(1, 8):
+    for col in [1,2,3,4,5,6,7,9,10,11,12]:
         ws.cell(row=start, column=col).fill = secfill
     rowmap = {}
     r = start + 1
@@ -199,6 +243,10 @@ def block(ws, start, name, formula, steps, sheetname):
             c.font = green if kind == "link" else (bold if kind == "result" else norm)
             if kind == "result":
                 c.fill = resfill
+                t = ws[f"{TC[j]}{r}"]
+                t.value = calc_text(c.value, row_fmt, f"{OC[j]}{r}", fmt)
+                t.font = Font(name=F, size=9); t.border = box
+        row_fmt[r] = fmt
         if kind == "result":
             RESULT[name] = (sheetname, r, fmt)
         r += 1
@@ -322,7 +370,7 @@ rr = 5
 for name, (sh, row, fmt) in RESULT.items():
     if name == "Yıllıklandırma (ara adım)":
         continue
-    ks.cell(row=rr, column=1, value=name).font = norm
+    ks.cell(row=rr, column=1, value=f"{name} ({EN[name]})").font = norm
     m0, m1, b0, b1 = [f"{sh}!{OC[j]}{row}" for j in range(4)]
     vals = {"B": f"={m0}", "C": f"={m1}", "D": f"=C{rr}-B{rr}", "E": f"=IF(B{rr}=0,\"n/a\",D{rr}/ABS(B{rr}))",
             "F": f"={b0}", "G": f"={b1}", "H": f"=G{rr}-F{rr}", "I": f"=IF(F{rr}=0,\"n/a\",H{rr}/ABS(F{rr}))",
@@ -334,7 +382,7 @@ for name, (sh, row, fmt) in RESULT.items():
         c.font = green if col in ("B", "C", "F", "G") else norm
         c.border = box
     rr += 1
-ks.column_dimensions["A"].width = 32
+ks.column_dimensions["A"].width = 46
 for i in range(2, 12):
     ks.column_dimensions[L(i)].width = 16
 ks.row_dimensions[4].height = 32
