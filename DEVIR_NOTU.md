@@ -9,11 +9,18 @@
 | Dosya | Ne işe yarar |
 |---|---|
 | `FM_Project_MGROS_BIMAS.xlsx` | Ortak Excel. Bütün oranlar bu dosyadaki rakamlardan hesaplanmalı. |
-| `kap/*_EN.pdf` | KAP'tan indirilen İngilizce konsolide finansal raporlar (kaynak gösterilen sürüm) |
-| `kap/*.pdf` (ekisiz) | Aynı raporların Türkçe sürümü (rakamlar aynı) |
-| `kap/README.md` | Raporların KAP bildirim linkleri ve yayın tarihleri |
+| `KAP_Raporlari/*_EN.pdf` | KAP'tan indirilen İngilizce konsolide finansal raporlar (Excel'de kaynak olarak gösterilen sürüm) |
+| `KAP_Raporlari/*.pdf` (ekisiz) | Aynı raporların Türkçe sürümü (rakamlar aynı) |
+| `KAP_Raporlari/Rapor_Linkleri.md` | Raporların KAP bildirim linkleri ve yayın tarihleri |
 | `teams_bildirim.txt` | Hocaya gönderilen grup ve şirket bildirimi |
-| `kap/veri.json`, `scripts/build_excel.py` | Excel'i yeniden üreten veri ve betik (rakam değişmedikçe gerek yok) |
+
+## Excel'le nasıl çalışılır
+
+- Excel'i doğrudan açıp düzenleyin; ek bir program gerekmez.
+- **`Raw_Data`, `Liquidity`, `Activity`, `Comparison`, `Checks` sayfalarındaki hücreleri değiştirmeyin.** Bu sayfalar 1. aşamanın kontrol edilmiş sonucudur.
+- Kendi bölümünüz için yeni bir sayfa açın (ör. `Leverage`, `Profitability`, `Market`, `DuPont`).
+- Aynı dosyayı iki kişi aynı anda düzenlerse değişiklikler kaybolabilir. Ya sırayla çalışın, ya da herkes kendi kopyasında kendi sayfasını hazırlasın; en sonda bir kişi sayfaları tek dosyada birleştirsin (sayfa sekmesine sağ tık → "Taşı veya Kopyala").
+- Eksik bir kalem gerekirse (ör. hisse fiyatı) `Raw_Data`'nın en altına yeni bir satır ekleyin ve yanına kaynağını yazın.
 
 ## Excel'in yapısı
 
@@ -23,7 +30,7 @@
 - **Comparison:** 6 aylık değişim ve MGROS − BIMAS farkı.
 - **Checks:** Bilanço eşitliği vb. kontroller (hepsi OK).
 
-Kendi oranlarınızı yeni sayfalarda (ör. `Leverage`, `Profitability`, `Market`, `DuPont`) `Raw_Data` hücrelerine bağlı formüllerle kurun; rakamı elle kopyalamayın. Aynı düzeni kullanırsanız (pay / payda / sonuç) rapor tutarlı görünür.
+Kendi oranlarınızı `Raw_Data` hücrelerine bağlı formüllerle kurun (ör. MGROS 2025Q4 toplam varlıklar için `=Raw_Data!B13`); rakamı elle kopyalamayın. Aynı düzeni kullanırsanız (pay / payda / sonuç) rapor tutarlı görünür.
 
 ## Mutlaka dikkat edilmesi gerekenler
 
