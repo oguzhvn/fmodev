@@ -4,6 +4,8 @@
 **Dönemler:** 2025Q4 (31.12.2025, 12 aylık) ve 2026Q2 (30.06.2026, 6 aylık)
 **Grup:** Muhammed Oğuzhan Sağmak, Seher Naz Yomluer, Buse Çalış, Elif Aldemir
 
+**GitHub reposu:** https://github.com/oguzhvn/fmodev — Dosyaların güncel hali burada. Sayfadaki yeşil **Code → Download ZIP** düğmesiyle hepsini indirebilirsiniz; GitHub hesabı veya program kurmak gerekmez (repo gizliyse önce davet edilmeniz gerekir).
+
 ## Dosyalar
 
 | Dosya | Ne işe yarar |
